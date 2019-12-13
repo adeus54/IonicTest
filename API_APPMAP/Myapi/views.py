@@ -24,7 +24,7 @@ from .serializers import AsignacionEmergenciaSerializer
 
 class FichaEmergenciaViewSet(viewsets.ModelViewSet):
     queryset = FichaEmergencia.objects.all()
-    serializer_class = FichaEmergenciaSerializer.data
+    serializer_class = FichaEmergenciaSerializer
 
 
 class EstadoViewSet(viewsets.ModelViewSet):

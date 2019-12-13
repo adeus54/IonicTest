@@ -12,9 +12,21 @@ from django.contrib.auth.models import User
 class FichaEmergenciaSerializer(serializers.ModelSerializer):
     class Meta:
         model = FichaEmergencia
-        fields = ('titulo', 'telefono', 'tipollamada', 'fecha_e', 'hora', 'provincia', 'canton', 'telefono',
-                  'direccionReporte', 'direccionIncidente', 'description', 'operador', 'reportador', 'alerta',
-                  'coorX', 'coorY')
+        fields = ('titulo',
+                  'telefono',
+                  'tipollamada',
+                  'fecha_e',
+                  'hora',
+                  'provincia',
+                  'canton',
+                  'direccionReporte',
+                  'direccionIncidente',
+                  'description',
+                  'operador',
+                  'reportador',
+                  'alerta',
+                  'coorX',
+                  'coorY')
 
 
 class EstadoSerializer(serializers.ModelSerializer):
