@@ -2,6 +2,10 @@
   "compileOnSave": false,
   "compilerOptions": {
     "baseUrl": "./",
+	"paths": {
+      "ol": ["node_modules/ol/src"],
+      "ol/*": ["node_modules/ol/src/*"]
+    },
     "outDir": "./dist/out-tsc",
     "sourceMap": true,
     "declaration": false,
@@ -14,13 +18,19 @@
     "typeRoots": [
       "node_modules/@types"
     ],
+	
     "lib": [
       "es2018",
       "dom"
     ]
   },
+  "include": [
+    "**/*.js",
+    "node_modules/ol/**/*.js"
+  ],
   "angularCompilerOptions": {
     "fullTemplateTypeCheck": true,
     "strictInjectionParameters": true
   }
+  
 }
