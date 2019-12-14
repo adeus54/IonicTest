@@ -31,6 +31,9 @@ class FichaEmergencia(models.Model):
     coorX = models.FloatField()
     coorY = models.FloatField()
 
+    titulo = models.CharField(max_length=30, default='')
+    telefono = models.CharField(max_length=10, default='')
+
 
 class Estado(models.Model):
     tipo = models.CharField(max_length=15)

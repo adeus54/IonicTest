@@ -1,9 +1,19 @@
 export interface Emergencia {
     _id: string;
-    fecha_e: string;
-    hora: string;
+    titulo: string;
     telefono: string;
-    description: string;
-    coordanete_x: string;
-    coordanete_y: string;
+    // tipollamada: string;
+    // fecha_e: Date;
+    // hora: string;
+    // provincia: string;
+    // canton: string;
+    // direccionReporte: string;
+    // direccionIncidente: string;
+    // description: Text;
+    // operador: string;
+    // reportador: string;
+    // alerta: string;
+    // coorX: number;
+    // coorY: number;
 }
+
