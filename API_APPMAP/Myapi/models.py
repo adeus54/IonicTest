@@ -7,15 +7,15 @@ from django.db import models
 
 # Create your models here.
 class FichaEmergencia(models.Model):
-    TIPO_LLAMADA = [
+    TIPO_LLAMADA = (
         (1, 'Celular'),
         (2, 'Telefono Fijo'),
-    ]
-    CLAVE_ALARMA = [
+    )
+    CLAVE_ALARMA = (
         (1, 'Clave Amarilla'),
         (2, 'Clave Roja'),
-    ]
-    titulo = models.CharField(max_length=30, default='')
+    )
+    titulo = models.CharField(max_length=150, default='')
     telefono = models.CharField(max_length=10, default='')
     tipollamada = models.CharField(max_length=10, choices=TIPO_LLAMADA, default=1,)
     fecha_e = models.DateField()
@@ -27,34 +27,35 @@ class FichaEmergencia(models.Model):
     description = models.TextField()
     operador = models.CharField(max_length=50, default='')
     reportador = models.CharField(max_length=50, default='')
-    alerta = models.CharField(max_length=30, choices=CLAVE_ALARMA, default=3,)
+    alerta = models.CharField(max_length=30, choices=CLAVE_ALARMA, default=2,)
     coorX = models.FloatField()
     coorY = models.FloatField()
 
-    titulo = models.CharField(max_length=30, default='')
-    telefono = models.CharField(max_length=10, default='')
+    def __str__(self):
+        return self.titulo
 
 
 class Estado(models.Model):
     tipo = models.CharField(max_length=15)
 
-
-class Retroalimentacion(models.Model):
-    idemrg = models.ForeignKey(FichaEmergencia, related_name='FichaEmergencia', on_delete=models.CASCADE)
-    idestado = models.ForeignKey(Estado, related_name='Estado', on_delete=models.CASCADE)
-    retro_A = models.CharField(max_length=100)
-    fecha_r = models.DateField()
-    hora = models.TimeField()
+    def __str__(self):
+        return self.tipo
 
 
 class Institucion(models.Model):
     nombre = models.CharField(max_length=100)
     description = models.CharField(max_length=100, default='')
 
+    def __str__(self):
+        return self.nombre
+
 
 class Recurso(models.Model):
     unidad = models.CharField(max_length=100)
     institucion = models.ForeignKey(Institucion, related_name='Institucion', on_delete = models.CASCADE, default='')
+
+    def __str__(self):
+        return self.unidad
 
 
 class Usuario(models.Model):
@@ -65,6 +66,18 @@ class Usuario(models.Model):
     password = models.CharField(max_length=100)
     institucion = models.ForeignKey(Institucion, on_delete=models.CASCADE, default='')
     recurso = models.ForeignKey(Recurso, related_name='Recurso', on_delete=models.CASCADE, default='')
+
+    def __str__(self):
+        return self.nombres + ' ' + self.apellidos
+
+
+class Retroalimentacion(models.Model):
+    idemrg = models.ForeignKey(FichaEmergencia, related_name='ficha', on_delete=models.CASCADE)
+    estado = models.ForeignKey(Estado, related_name='Estado', on_delete=models.CASCADE)
+    usuario = models.ForeignKey(Usuario, related_name='reporta', on_delete=models.CASCADE, default='')
+    Descripcion = models.CharField(max_length=100)
+    fecha_r = models.DateField()
+    hora = models.TimeField()
 
 
 class AsignacionEmergencia(models.Model):

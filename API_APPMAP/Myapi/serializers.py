@@ -9,10 +9,19 @@ from .models import AsignacionEmergencia
 from django.contrib.auth.models import User
 
 
+class RetroalimentacionSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Retroalimentacion
+        fields = ('idemrg', 'estado','usuario', 'Descripcion', 'fecha_r', 'hora')
+
+
 class FichaEmergenciaSerializer(serializers.ModelSerializer):
+    # ficha = RetroalimentacionSerializer(many=True, read_only=True)
+
     class Meta:
         model = FichaEmergencia
-        fields = ('titulo',
+        fields = ('id', 'titulo',
                   'telefono',
                   'tipollamada',
                   'fecha_e',
@@ -26,19 +35,13 @@ class FichaEmergenciaSerializer(serializers.ModelSerializer):
                   'reportador',
                   'alerta',
                   'coorX',
-                  'coorY')
+                  'coorY', )#'ficha'
 
 
 class EstadoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Estado
-        fields = "__all__"
-
-
-class RetroalimentacionSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Retroalimentacion
-        fields = ('idemrg', 'idestado', 'retro_A', 'fecha_r', 'hora')
+        fields = ('id', 'tipo')
 
 
 class UsuarioSerializer(serializers.ModelSerializer):
@@ -46,21 +49,21 @@ class UsuarioSerializer(serializers.ModelSerializer):
         model = Usuario
         fields = ('id_user', 'nombres', 'apellidos', 'username', 'password', 'institucion', 'recurso')
 
-    def create(self, validate_data):
-        instance = User()
-        instance.first_name = validate_data.get('nombres')
-        instance.last_name = validate_data.get('apellidos')
-        instance.username = validate_data.get('username')
-        instance.set_password(validate_data.get('password'))
-        instance.save()
-        return instance
+    #def create(self, validate_data):
+        #instance = User()
+        # instance.first_name = validate_data.get('nombres')
+        # instance.last_name = validate_data.get('apellidos')
+        # instance.username = validate_data.get('username')
+        # instance.set_password(validate_data.get('password'))
+        # instance.save()
+        # return instance
 
-    def validated_data(self, data):
-        users = User.objects.filter(username=data)
-        if len(users) != 0:
-            raise serializers.ValidationError('Usuario ya exitente')
-        else:
-            return data
+    # def validated_data(self, data):
+        # users = User.objects.filter(username=data)
+        # if len(users) != 0:
+        #     raise serializers.ValidationError('Usuario ya exitente')
+        # else:
+    #     return data
 
 
 class InstitucionSerializer(serializers.ModelSerializer):
@@ -76,6 +79,10 @@ class RecursoSerializer(serializers.ModelSerializer):
 
 
 class AsignacionEmergenciaSerializer(serializers.ModelSerializer):
+    #emergencia = ichaEmergenciaSerializer(many=False, read_only=True)
+    #asignacion = UsuarioSerializer(many=False, read_only=True)
+
     class Meta:
         model = AsignacionEmergencia
         fields = ('emergencia', 'asignacion')
+        #depth = 1
