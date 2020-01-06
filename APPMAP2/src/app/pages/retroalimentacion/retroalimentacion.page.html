@@ -1,0 +1,44 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Emergencia ECU-911</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Retroalimentacion</ion-card-title>
+    </ion-card-header>
+    <ion-list>
+      <!-- <ion-item>
+        <ion-label position="floating">Tipo Emergencia</ion-label>
+        <ion-input type="text"></ion-input>
+      </ion-item> -->
+      <ion-item>
+        <ion-label position="floating">Estado</ion-label>
+        <ion-input type="text"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Usuario</ion-label>
+        <ion-input type="text"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Descripcion</ion-label>
+        <ion-input type="text"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Fecha</ion-label>
+        <ion-datetime value="1990-02-19" placeholder="Select Date"></ion-datetime>
+      </ion-item>
+      <ion-item>
+        <ion-label>Hora</ion-label>
+        <ion-datetime display-format="h:mm A" picker-format="h:mm A"  value="1990-02-19T07:43Z"></ion-datetime>
+      </ion-item>
+    </ion-list>
+    <div class=botones>
+      <ion-button url color="primary" fill="outline" [routerLink]="['/ficha-emergencia']">Detalles</ion-button>
+      <ion-button url color="primary" fill="outline">Enviar</ion-button>
+      <ion-button color="danger">Limpiar</ion-button>   
+    </div>
+  </ion-card>
+</ion-content>

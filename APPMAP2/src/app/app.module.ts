@@ -6,11 +6,19 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 
+//servicios
+import { AuthorizationService } from './services/authorization.service'
+
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { Geolocation } from '@ionic-native/geolocation';
+<<<<<<< HEAD
 
+=======
+import { MapModule } from './pages/map/map.module';
+import { from } from 'rxjs';
+>>>>>>> 1be55e70dd4d11b66792fea2b812837932bc45da
 
 
 
@@ -26,7 +34,12 @@ import { Geolocation } from '@ionic-native/geolocation';
   providers: [
     StatusBar,
       SplashScreen,
+<<<<<<< HEAD
 
+=======
+      MapModule,
+      AuthorizationService,
+>>>>>>> 1be55e70dd4d11b66792fea2b812837932bc45da
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]
