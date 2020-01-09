@@ -3,13 +3,13 @@ from __future__ import unicode_literals
 
 from django.shortcuts import render
 from rest_framework import viewsets
-from .models import FichaEmergencia
-from .models import Estado
-from .models import Retroalimentacion
-from .models import Usuario
-from .models import Institucion
-from .models import Recurso
-from .models import AsignacionEmergencia
+from rest_framework.views import APIView
+from .serializers import LoginSerializer
+from django.contrib.auth import login as django_login, logout as django_logout
+from rest_framework.authtoken.models import Token
+from rest_framework.authentication import TokenAuthentication
+from rest_framework.response import Response
+from .models import *
 
 from .serializers import FichaEmergenciaSerializer
 from .serializers import EstadoSerializer
@@ -38,8 +38,18 @@ class RetroalimentacionViewSet(viewsets.ModelViewSet):
 
 
 class UsuarioViewSet(viewsets.ModelViewSet):
-    queryset = Usuario.objects.all()
     serializer_class = UsuarioSerializer
+    queryset = Usuario.objects.all()
+
+
+class LoginView(APIView):
+    def post(self, request):
+        serializer = LoginSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        user = serializer.validated_data["user"]
+        django_login(request, user)
+        token, created = Token.objects.get_or_create(user=user)
+        return Response({"token": token.key}, status=200)
 
 
 class InstitucionViewSet(viewsets.ModelViewSet):

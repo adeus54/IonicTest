@@ -6,7 +6,8 @@ from .models import Usuario
 from .models import Institucion
 from .models import Recurso
 from .models import AsignacionEmergencia
-from django.contrib.auth.models import User
+from django.contrib.auth import authenticate
+from rest_framework import exceptions
 
 
 class RetroalimentacionSerializer(serializers.ModelSerializer):
@@ -47,23 +48,46 @@ class EstadoSerializer(serializers.ModelSerializer):
 class UsuarioSerializer(serializers.ModelSerializer):
     class Meta:
         model = Usuario
-        fields = ('id_user', 'nombres', 'apellidos', 'username', 'password', 'institucion', 'recurso')
+        fields = ('id_user', 'first_name', 'last_name', 'username', 'password', 'institucion', 'recurso')
+        #extra_kwargs = {
+            #'password': {'write_only': True}
+        #}
 
-    #def create(self, validate_data):
-        #instance = User()
-        # instance.first_name = validate_data.get('nombres')
-        # instance.last_name = validate_data.get('apellidos')
-        # instance.username = validate_data.get('username')
-        # instance.set_password(validate_data.get('password'))
-        # instance.save()
-        # return instance
+    def save(self):
+        usuario = Usuario(
+                    id_user=self.validated_data['id_user'],
+                    username=self.validated_data['username'],
+                    first_name=self.validated_data['first_name'],
+                    last_name=self.validated_data['last_name'],
+                    institucion=self.validated_data['institucion'],
+                    recurso=self.validated_data['recurso'],
+            )
+        password = self.validated_data['password']
+        usuario.set_password(password)
+        usuario.save()
+        return usuario
 
-    # def validated_data(self, data):
-        # users = User.objects.filter(username=data)
-        # if len(users) != 0:
-        #     raise serializers.ValidationError('Usuario ya exitente')
-        # else:
-    #     return data
+
+class LoginSerializer(serializers.Serializer):
+    username = serializers.CharField()
+    password = serializers.CharField()
+
+    def validate(self, data):
+        username = data.get("username", "")
+        password = data.get("password", "")
+
+        if username and password:
+            user = authenticate(username=username, password=password)
+            if user:
+                if user.is_active:
+                    data["user"] = user
+                else:
+                    raise exceptions.ValidationError("Usuario esta desactivado")
+            else:
+                raise exceptions.ValidationError("Los datos son incorrectos")
+        else:
+            raise exceptions.ValidationError("No se deben dejar campos sin llenar")
+        return data
 
 
 class InstitucionSerializer(serializers.ModelSerializer):

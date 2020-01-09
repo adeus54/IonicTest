@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 
 from django.db import models
-from django.db import models
+from django.contrib.auth.models import AbstractBaseUser, AbstractUser
 
 
 # Create your models here.
@@ -58,17 +58,17 @@ class Recurso(models.Model):
         return self.unidad
 
 
-class Usuario(models.Model):
-    id_user = models.CharField(max_length=100, primary_key=True, default='')
-    nombres = models.CharField(max_length=100)
-    apellidos = models.CharField(max_length=100)
-    username = models.CharField(max_length=100)
-    password = models.CharField(max_length=100)
-    institucion = models.ForeignKey(Institucion, on_delete=models.CASCADE, default='')
-    recurso = models.ForeignKey(Recurso, related_name='Recurso', on_delete=models.CASCADE, default='')
+class Usuario(AbstractUser):
+    id_user = models.CharField(max_length=10, primary_key=True, unique=True)
+    first_name = models.CharField(max_length=100)
+    username = models.CharField(max_length=100, unique=True)
+    institucion = models.ForeignKey(Institucion, on_delete=models.CASCADE)
+    recurso = models.ForeignKey(Recurso, related_name='Recurso', on_delete=models.CASCADE)
+
+    USERNAME_FIELD = 'username'
 
     def __str__(self):
-        return self.nombres + ' ' + self.apellidos
+        return self.first_name + ' ' + self.last_name
 
 
 class Retroalimentacion(models.Model):

@@ -4,8 +4,22 @@
     <list default="true" id="84301cfb-21b9-4e38-b746-550241ce6783" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/API_APPMAP/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/API_APPMAP/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/API_APPMAP/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/API_APPMAP/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Myapi/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/Myapi/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Myapi/migrations/0001_initial.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Myapi/migrations/0002_auto_20191216_0231.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Myapi/migrations/0003_auto_20191216_0236.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Myapi/migrations/0004_auto_20191218_0422.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Myapi/migrations/0005_auto_20191218_0510.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Myapi/migrations/0006_retroalimentacion_usuario.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Myapi/migrations/0007_auto_20191218_0709.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Myapi/migrations/0008_auto_20191218_0740.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Myapi/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/Myapi/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Myapi/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/Myapi/serializers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Myapi/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/Myapi/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Myapi/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Myapi/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../APPMAP2/.vs/APPMAP2/v16/.suo" beforeDir="false" afterPath="$PROJECT_DIR$/../APPMAP2/.vs/APPMAP2/v16/.suo" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../APPMAP2/.vs/slnx.sqlite" beforeDir="false" afterPath="$PROJECT_DIR$/../APPMAP2/.vs/slnx.sqlite" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
