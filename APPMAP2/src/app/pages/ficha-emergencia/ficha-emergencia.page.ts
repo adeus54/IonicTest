@@ -11,7 +11,7 @@ import { Observable } from 'rxjs';
 })
 export class FichaEmergenciaPage implements OnInit {
 
-  // emergencias: Observable<Emergencia[]>;
+  emergencias: Observable<Emergencia[]>;
 
   constructor(
     private emergenciaService: EmergenciaService) { }
@@ -26,11 +26,10 @@ export class FichaEmergenciaPage implements OnInit {
   // }
 
   getEmergencias() {
-    this.emergenciaService.getAllEmergencias()
-      .subscribe(emergencias => {
-        console.log(emergencias);
-      });
+    this.emergencias = this.emergenciaService.getAllEmergencias();
   }
+
+  
 
 
 }

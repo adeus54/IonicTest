@@ -4,68 +4,126 @@
   </ion-toolbar>
 </ion-header>
 
-
-
 <ion-content fullscreen>
   <ion-card>
     <ion-card-header>
       <ion-card-title>Formulario Emergencia</ion-card-title>
     </ion-card-header>
-    <ion-list>
-      <ion-item>
-        <ion-label position="floating">Titulo</ion-label>
-        <ion-input type="text"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label position="floating">Telefono</ion-label>
-        <ion-input type="text"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label>Fecha</ion-label>
-        <ion-datetime value="1990-02-19" placeholder="Select Date"></ion-datetime>
-      </ion-item>
-      <ion-item>
-        <ion-label>Start Time</ion-label>
-        <ion-datetime display-format="h:mm A" picker-format="h:mm A" value="1990-02-19T07:43Z"></ion-datetime>
-      </ion-item>
+    <div *ngFor="let emergencia of emergencias | async" style="width: 300px;">
+      <!-- titulo: {{emergencia.titulo}} -->
+      <ion-list>
 
-      <ion-item>
-        <ion-label position="floating">Provincia</ion-label>
-        <ion-input type="text"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label position="floating">Canton</ion-label>
-        <ion-input type="text"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label position="floating">Direccion Reporte</ion-label>
-        <ion-input type="text"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label position="floating">Direccion Incidente</ion-label>
-        <ion-input type="text"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label position="floating">Descripcion</ion-label>
-        <ion-input type="text"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label position="floating">Operador</ion-label>
-        <ion-input type="text"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label position="floating">Reportador</ion-label>
-        <ion-input type="text"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label position="floating">Coordenada Y</ion-label>
-        <ion-input type="text"></ion-input>
-      </ion-item>
-    </ion-list>
-    <div class=botones>
-      <ion-button url color="primary" fill="outline">Enviar</ion-button>
-      <ion-button color="danger">Cancelar</ion-button>
-      <ion-button color="danger" (click)="getEmergencias()">Obtener</ion-button>
+        <ion-item>
+          <ion-label>
+            <h2>Titulo</h2>
+            <p>{{emergencia.titulo}}</p>
+          </ion-label>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>
+            <h2>Telefono</h2>
+            <p>{{emergencia.telefono}}</p>
+          </ion-label>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>
+            <h2>Tipo Llamada</h2>
+            <p>{{emergencia.tipollamada}}</p>
+          </ion-label>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>
+            <h2>Fecha</h2>
+            <p>{{emergencia.fecha_e}}</p>
+          </ion-label>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>
+            <h2>Hora</h2>
+            <p>{{emergencia.hora}}</p>
+          </ion-label>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>
+            <h2>Provincia</h2>
+            <p>{{emergencia.provincia}}</p>
+          </ion-label>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>
+            <h2>Canton</h2>
+            <p>{{emergencia.canton}}</p>
+          </ion-label>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>
+            <h2>Direccion Reporte</h2>
+            <p>{{emergencia.direccionReporte}}</p>
+          </ion-label>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>
+            <h2>Direccion Incidente</h2>
+            <p>{{emergencia.direccionIncidente}}</p>
+          </ion-label>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>
+            <h2>Descripcion</h2>
+            <p>{{emergencia.description}}</p>
+          </ion-label>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>
+            <h2>Operador</h2>
+            <p>{{emergencia.operador}}</p>
+          </ion-label>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>
+            <h2>Reportador</h2>
+            <p>{{emergencia.reportador}}</p>
+          </ion-label>
+        </ion-item>
+
+
+        <ion-item>
+          <ion-label>
+            <h2>Alerta</h2>
+            <p>{{emergencia.alerta}}</p>
+          </ion-label>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>
+            <h2>Coordenada X</h2>
+            <p>{{emergencia.coorX}}</p>
+          </ion-label>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>
+            <h2>Coordenada Y</h2>
+            <p>{{emergencia.coorY}}</p>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+      <div class= botones>
+        <ion-button url color="primary" fill="outline" [routerLink]="['/retroalimentacion']">Retroalimentacion
+        </ion-button>
+        <ion-button color="danger" [routerLink]="['/home']">Emergencia</ion-button>
+      </div>
     </div>
   </ion-card>
 </ion-content>

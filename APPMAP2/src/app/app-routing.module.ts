@@ -6,9 +6,8 @@ const routes: Routes = [
   { path: 'emergencia', loadChildren: './pages/emergencia/emergencia.module#EmergenciaPageModule' },
   { path: 'home', loadChildren: './pages/home/home.module#HomePageModule' },
   { path: 'ficha-emergencia', loadChildren: './pages/ficha-emergencia/ficha-emergencia.module#FichaEmergenciaPageModule' },
-
-
-
+  { path: 'retroalimentacion', loadChildren: './pages/retroalimentacion/retroalimentacion.module#RetroalimentacionPageModule' },
+  { path: 'mapa', loadChildren: './pages/mapa/mapa.module#MapaPageModule' },
 
 ];
 
