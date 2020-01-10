@@ -2,7 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="84301cfb-21b9-4e38-b746-550241ce6783" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/API_APPMAP/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/API_APPMAP/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Myapi/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/Myapi/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Myapi/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/Myapi/serializers.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

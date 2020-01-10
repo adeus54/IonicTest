@@ -14,7 +14,7 @@ class RetroalimentacionSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Retroalimentacion
-        fields = ('idemrg', 'estado','usuario', 'Descripcion', 'fecha_r', 'hora')
+        fields = ('emergencia','usuario', 'estado', 'Descripcion', 'fecha', 'hora')
 
 
 class FichaEmergenciaSerializer(serializers.ModelSerializer):

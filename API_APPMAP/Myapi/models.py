@@ -72,12 +72,12 @@ class Usuario(AbstractUser):
 
 
 class Retroalimentacion(models.Model):
-    idemrg = models.ForeignKey(FichaEmergencia, related_name='ficha', on_delete=models.CASCADE)
+    emergencia = models.ForeignKey(FichaEmergencia, related_name='ficha', on_delete=models.CASCADE)
     estado = models.ForeignKey(Estado, related_name='Estado', on_delete=models.CASCADE)
-    usuario = models.ForeignKey(Usuario, related_name='reporta', on_delete=models.CASCADE, default='')
+    usuario = models.ForeignKey(Usuario, related_name='reporta', on_delete=models.CASCADE)
     Descripcion = models.CharField(max_length=100)
-    fecha_r = models.DateField()
-    hora = models.TimeField()
+    fecha = models.DateField(auto_now_add=True)
+    hora = models.TimeField(auto_now=True)
 
 
 class AsignacionEmergencia(models.Model):
