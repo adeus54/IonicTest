@@ -1,6 +1,9 @@
 <ion-header>
   <ion-toolbar color="primary">
-    <ion-title>Emergencia ECU-911</ion-title>
+    <ion-title>ECU-911 {{nombre}}</ion-title>
+    <ion-button (click)="logout()">
+      <ion-icon slot="icon-only" name = "log-out"></ion-icon>
+    </ion-button>
   </ion-toolbar>
 </ion-header>
 
@@ -40,8 +43,10 @@
         </ion-item>
       </ion-list>
       <div class=botones>
-        <ion-button url color="primary" fill="outline" (click)="emergenciaSelected(emergencia)"  [routerLink]="['/ficha-emergencia']" >Detalles
+        <ion-button url color="primary" fill="outline" (click)="emergenciaSelected(emergencia)" 
+            routerLink="/ficha-emergencia/{{emergencia.id}}" >Detalles
         </ion-button>
+        <ion-button color="danger"   (click)="emergenciaSelected(emergencia)" routerLink="/retroalimentacion/{{emergencia.id}}"> Retroalimentacion</ion-button>
         <ion-button color="danger"  [routerLink]="['/mapa']"> Mapa</ion-button>
       </div>
     </div>

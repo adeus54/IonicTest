@@ -16,15 +16,22 @@ export class EmergenciaService {
     private http: HttpClient
   ) { }
 
-
+  //Todas las emergencias
   getAllEmergencias(): Observable<any> {
     const path = `${this.URL_API}/`;
     return this.http.get<Emergencia[]>(path);
   }
-
+  //Una emergencia
   getOneEmergencia(id): Observable<any> {
     return this.http.get(this.URL_API + '/' + id + '/');
   }
+
+  asignacionEmergecia(id): Observable<any> {
+    return this.http.get(this.URL_API + '/' + id + '/')
+  }
+
+
+
 
   // getEmergencia(id: string): Observable<object> {
   //   return this.http.get(`${this.URL_API}/${id}`);

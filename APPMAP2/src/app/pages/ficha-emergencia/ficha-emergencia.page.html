@@ -9,7 +9,7 @@
     <ion-card-header>
       <ion-card-title>Formulario Emergencia</ion-card-title>
     </ion-card-header>
-    <div *ngFor="let emergencia of emergencias | async" style="width: 300px;">
+    <div style="width: 300px;">
       <!-- titulo: {{emergencia.titulo}} -->
       <ion-list>
 
@@ -120,8 +120,6 @@
         </ion-item>
       </ion-list>
       <div class= botones>
-        <ion-button url color="primary" fill="outline" [routerLink]="['/retroalimentacion']">Retroalimentacion
-        </ion-button>
         <ion-button color="danger" [routerLink]="['/home']">Emergencia</ion-button>
       </div>
     </div>
