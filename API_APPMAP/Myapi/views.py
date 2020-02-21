@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.shortcuts import render
+
 from rest_framework import viewsets
 from rest_framework.views import APIView
-from .serializers import LoginSerializer
+
 from django.contrib.auth import login as django_login, logout as django_logout
 from rest_framework.authtoken.models import Token
 from rest_framework.authentication import TokenAuthentication
@@ -18,31 +18,48 @@ from .serializers import UsuarioSerializer
 from .serializers import InstitucionSerializer
 from .serializers import RecursoSerializer
 from .serializers import AsignacionEmergenciaSerializer
+from .serializers import LoginSerializer
+
+from rest_framework.permissions import IsAuthenticated, IsAdminUser
+from django.views.generic.list import ListView
 
 # Create your views here.
 
 
 class FichaEmergenciaViewSet(viewsets.ModelViewSet):
+    permission_classes = [IsAuthenticated, IsAdminUser]
     queryset = FichaEmergencia.objects.all()
     serializer_class = FichaEmergenciaSerializer
 
 
 class EstadoViewSet(viewsets.ModelViewSet):
+    #permission_classes = [IsAuthenticated, IsAdminUser]
     queryset = Estado.objects.all()
     serializer_class = EstadoSerializer
 
+    def get_permissions(self):
+        if self.action == 'retrieve':
+            permission_classes = [IsAdminUser]
+        else:
+            permission_classes = [IsAuthenticated]
+        return [permission() for permission in permission_classes]
+
 
 class RetroalimentacionViewSet(viewsets.ModelViewSet):
+    permission_classes = [IsAuthenticated]
     queryset = Retroalimentacion.objects.all()
     serializer_class = RetroalimentacionSerializer
 
 
 class UsuarioViewSet(viewsets.ModelViewSet):
+    permission_classes = [IsAuthenticated, IsAdminUser]
     serializer_class = UsuarioSerializer
     queryset = Usuario.objects.all()
 
 
 class LoginView(APIView):
+    permission_classes = []
+
     def post(self, request):
         serializer = LoginSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
@@ -53,15 +70,20 @@ class LoginView(APIView):
 
 
 class InstitucionViewSet(viewsets.ModelViewSet):
+    permission_classes = [IsAuthenticated, IsAdminUser]
     queryset = Institucion.objects.all()
     serializer_class = InstitucionSerializer
 
 
 class RecursoViewSet(viewsets.ModelViewSet):
+    permission_classes = [IsAuthenticated, IsAdminUser]
     queryset = Recurso.objects.all()
     serializer_class = RecursoSerializer
 
 
 class AsignacionEmergenciaViewSet(viewsets.ModelViewSet):
+    permission_classes = [IsAuthenticated, IsAdminUser]
     queryset = AsignacionEmergencia.objects.all()
     serializer_class = AsignacionEmergenciaSerializer
+
+
