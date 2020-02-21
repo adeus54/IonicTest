@@ -10,15 +10,15 @@
     <ion-item class="activated">
       <ion-icon name="contact" slot="start"></ion-icon>
       <ion-label position="floating">User</ion-label>
-      <ion-input type="text" name="user"></ion-input>
+      <ion-input type="text" name="user" [(ngModel)]="input.username"></ion-input>
     </ion-item>
     <br>
     <ion-item class="activated">
       <ion-icon name="finger-print" slot="start"></ion-icon>
       <ion-label position="floating">Password</ion-label>
-      <ion-input type="password" name="password"></ion-input>
+      <ion-input type="password" name="password" [(ngModel)]="input.password"></ion-input>
     </ion-item>
     <br>
-    <ion-button color="danger" class="button">Acceder</ion-button>
+    <ion-button color="danger" class="button" (click) = "onLogin()" >Acceder</ion-button>
   </ion-card>
 </ion-content>

@@ -33,7 +33,7 @@ export class MapaPage implements OnInit {
     var source = new OSM();
     var layer = new TileLayer();
     var position = fromLonLat([-79.2042236, -3.99313]);
-    var view = new View({ center: position, zoom: 6 });
+    var view = new View({ center: position, zoom: 16 });
     this.map = new Map({ layers: [layer], view: view });
     console.log('Hello');
     this.map.setTarget('map');
