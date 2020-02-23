@@ -40,7 +40,6 @@ export class LoginPage implements OnInit {
         // alert('USER' + ' ' + ' es incorrecto');
         console.log('error', error);
       },
-      
     );
   }
 

@@ -42,33 +42,18 @@ export class RetroalimentacionPage implements OnInit {
   creaRetroalimentacion(){
     const retroalimentacion = {
 
-    idEmergencia: '4',
-    usuario: 'Carlos',
-    estado: 'En Camino',
-    descripcion: 'Hola',
-        //  fecha: '12/13/14',
-        //  hora: '12:12:12',
+    emergencia: '2',
+    usuario: '1',
+    estado: '2',
+    Descripcion: 'por fin',
+    fecha: '2020-02-21',
+    hora: '03:09:45.281654'
     };
     this.retroalimentacionService.creaRetroalimentacion(retroalimentacion)
       .subscribe((nuevaRetroalimentacion) => {
         console.log(nuevaRetroalimentacion);
+        console.log('se guardo')
       });
-
     // console.log('ok')
   }
-
-  createTask() {
-    const task = {
-      userId: '1',
-      title: 'change title',
-      completed: true
-    };
-    this.retroalimentacionService.createTask(task)
-    .subscribe((newTask) => {
-      console.log(newTask);
-    });
-  }
-
-  
-
 }

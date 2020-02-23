@@ -27,9 +27,11 @@ export class FichaEmergenciaPage implements OnInit {
   }
 
 
+  //Detalles de todas las emergencias
   getDetalles(idEmergencia: string):void {
     this.emergenciaService.getOneEmergencia(idEmergencia).subscribe( nota => {
       this.emergencia = nota;
+      
     });
   }
 }

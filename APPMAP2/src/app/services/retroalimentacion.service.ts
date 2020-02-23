@@ -23,7 +23,7 @@ export class RetroalimentacionService {
     let params = JSON.stringify(retroalimentacion);
     let headers = new HttpHeaders().set('Content-Type', 'application/json');
     let headers2 =  new HttpHeaders().set('Authorization', 'token')
-    const path = `${this.URL_API}/`;
+    const path = `${this.URL_API}`;
     return this.http.post(path, params, { headers: headers});
   }
 
