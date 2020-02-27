@@ -29,6 +29,7 @@ export class MapaPage implements OnInit {
   ionViewDidEnter() {
       this.makemap();
   }
+  
   makemap() {
     var source = new OSM();
     var layer = new TileLayer();

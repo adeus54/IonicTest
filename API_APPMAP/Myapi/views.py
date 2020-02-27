@@ -1,6 +1,4 @@
 # -*- coding: utf-8 -*-
-from __future__ import unicode_literals
-
 
 from rest_framework import viewsets
 from rest_framework.views import APIView
@@ -23,36 +21,37 @@ from .serializers import LoginSerializer
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from django.views.generic.list import ListView
 
+
 # Create your views here.
 
 
 class FichaEmergenciaViewSet(viewsets.ModelViewSet):
-    permission_classes = [IsAuthenticated, IsAdminUser]
+    permission_classes = []
     queryset = FichaEmergencia.objects.all()
     serializer_class = FichaEmergenciaSerializer
 
 
 class EstadoViewSet(viewsets.ModelViewSet):
-    #permission_classes = [IsAuthenticated, IsAdminUser]
+    # permission_classes = [IsAuthenticated, IsAdminUser]
     queryset = Estado.objects.all()
     serializer_class = EstadoSerializer
 
     def get_permissions(self):
         if self.action == 'retrieve':
-            permission_classes = [IsAdminUser]
+            permission_classes = []
         else:
-            permission_classes = [IsAuthenticated]
+            permission_classes = []
         return [permission() for permission in permission_classes]
 
 
 class RetroalimentacionViewSet(viewsets.ModelViewSet):
-    permission_classes = [IsAuthenticated]
+    permission_classes = []
     queryset = Retroalimentacion.objects.all()
     serializer_class = RetroalimentacionSerializer
 
 
 class UsuarioViewSet(viewsets.ModelViewSet):
-    permission_classes = [IsAuthenticated, IsAdminUser]
+    permission_classes = []
     serializer_class = UsuarioSerializer
     queryset = Usuario.objects.all()
 
@@ -64,26 +63,25 @@ class LoginView(APIView):
         serializer = LoginSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         user = serializer.validated_data["user"]
+        test = UsuarioSerializer(user)
         django_login(request, user)
         token, created = Token.objects.get_or_create(user=user)
-        return Response({"token": token.key}, status=200)
+        return Response({"token": token.key, "username": test.data}, status=200)
 
 
 class InstitucionViewSet(viewsets.ModelViewSet):
-    permission_classes = [IsAuthenticated, IsAdminUser]
+    permission_classes = []
     queryset = Institucion.objects.all()
     serializer_class = InstitucionSerializer
 
 
 class RecursoViewSet(viewsets.ModelViewSet):
-    permission_classes = [IsAuthenticated, IsAdminUser]
+    permission_classes = []
     queryset = Recurso.objects.all()
     serializer_class = RecursoSerializer
 
 
 class AsignacionEmergenciaViewSet(viewsets.ModelViewSet):
-    permission_classes = [IsAuthenticated, IsAdminUser]
+    permission_classes = []
     queryset = AsignacionEmergencia.objects.all()
     serializer_class = AsignacionEmergenciaSerializer
-
-

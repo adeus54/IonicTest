@@ -68,7 +68,7 @@ class Usuario(AbstractUser):
     USERNAME_FIELD = 'username'
 
     def __str__(self):
-        return self.first_name + ' ' + self.last_name
+        return self.first_name + ' ' + self.last_name + ' - ' + self.institucion.nombre
 
 
 class Retroalimentacion(models.Model):
