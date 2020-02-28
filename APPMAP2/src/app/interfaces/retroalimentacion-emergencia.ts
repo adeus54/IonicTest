@@ -1,11 +1,10 @@
-import { Deserializable} from './deserializable';
 import { Emergencia } from './emergencia';
 export interface RetroalimentacionEmergencia {
-    idEmergencia?: string;
+    emergencia?: string;
     usuario?: string;
     estado?: string;
     descripcion?: string;
-    fecha_r?: string;
+    fecha?: string;
     hora?: string;
 
 }

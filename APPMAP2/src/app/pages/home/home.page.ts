@@ -3,6 +3,7 @@ import { EmergenciaService } from '../../services/emergencia.service';
 import { Emergencia } from '../../interfaces/emergencia';
 import { Observable } from 'rxjs';
 import { AuthorizationService} from '../../services/authorization.service'
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -11,19 +12,36 @@ import { AuthorizationService} from '../../services/authorization.service'
 })
 export class HomePage implements OnInit{
 
-    private nombre: string;
+    username: any;
+    nombre: any;
     
     emergencias: Observable<Emergencia[]>;
     selectedMovie;
 
   constructor(
     private emergenciaService: EmergenciaService,
-    private authorizationService: AuthorizationService
+    private authorizationService: AuthorizationService,
+    private router: Router
   ) { }
 
     ngOnInit() {
       this.getEmergencias();
+      this.getNombreUsuario();
+      this.getUsername();
+      
+      // let nombre = this.authorizationService.obtenerNombreUsuario();
+      // this.username = `${nombre}`;
+
     }
+
+    getUsername() {
+      this.username = this.authorizationService.obtenerUsername();
+    }
+
+    getNombreUsuario(){
+      this.nombre = this.authorizationService.obtenerNombreUsuario();
+    }
+   
 
     getEmergencias() {
       this.emergencias = this.emergenciaService.getAllEmergencias();
@@ -39,14 +57,12 @@ export class HomePage implements OnInit{
         error => {
           console.log(error);
         }
-      );
+      );  
     }
 
-    logout(){
-      this.authorizationService.logOutUser();
+    cerrarSesion() {
+      this.authorizationService.cerrarSesionUsuario();
+      // this.router.navigate(['/login']);
     }
 
-    nombreUsuario(){
-      this.nombre= this.authorizationService.obtenerNombreUsuario() + " ";
-    }
 }

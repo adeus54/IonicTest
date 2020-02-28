@@ -14,7 +14,7 @@ export class EmergenciaService {
 
   constructor(
     private http: HttpClient
-  ) { }
+  ) { }any
 
   //Todas las emergencias
   getAllEmergencias(): Observable<any> {
@@ -23,6 +23,7 @@ export class EmergenciaService {
   }
   //Una emergencia
   getOneEmergencia(id): Observable<any> {
+    console.log('emergenciaId:', id);
     return this.http.get(this.URL_API + '/' + id + '/');
   }
 

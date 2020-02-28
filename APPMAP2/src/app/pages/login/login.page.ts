@@ -21,27 +21,39 @@ export class LoginPage implements OnInit {
   
   ngOnInit() {
     this.input = {
-      username: '',
-      password: ''    
+      username: [''],
+      password: ['']    
     };
   }
- 
+
+  
   onLogin(){
-    this.authorizacionService.loginUser(this.input).subscribe(
-      response => {
-      // console.log(response);
-      var token = response;
-      console.log(token);
-      this.authorizacionService.iniciarSesionUsuario(response.token, response.idUsuario, response.nombreUsuario, response.apellidoUsuario);
-      // console.log(response);
-      this.router.navigate(['/home'])
-      },
-      error => {
-        // alert('USER' + ' ' + ' es incorrecto');
-        console.log('error', error);
-      },
-    );
+    this.authorizacionService.consultarUsuarioIngreso(this.input);
+    this.router.navigate(['/home'])
   }
+
+
+  token(){
+    this.authorizacionService.obtenerToken()
+  }
+
+ 
+  // onLogin(){
+  //   this.authorizacionService.loginUser(this.input).subscribe(
+  //     response => {
+  //     // console.log(response);
+  //     var token = response;
+  //     console.log(token);
+  //     this.authorizacionService.iniciarSesionUsuario(response.token, response.username, response.id);
+  //     // console.log(response);
+  //     this.router.navigate(['/home'])
+  //     },
+  //     error => {
+  //       // alert('USER' + ' ' + ' es incorrecto');
+  //       console.log('error', error);
+  //     },
+  //   );
+  // }
 
   // navigate(){
   //   this.router.navigate(['/home'])

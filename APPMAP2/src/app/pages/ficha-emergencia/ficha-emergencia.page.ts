@@ -14,6 +14,8 @@ export class FichaEmergenciaPage implements OnInit {
 
   // emergencias: Observable<Emergencia[]>;
 
+  
+
   public emergencia: Emergencia = {};
 
   constructor(
@@ -31,7 +33,6 @@ export class FichaEmergenciaPage implements OnInit {
   getDetalles(idEmergencia: string):void {
     this.emergenciaService.getOneEmergencia(idEmergencia).subscribe( nota => {
       this.emergencia = nota;
-      
     });
   }
 }

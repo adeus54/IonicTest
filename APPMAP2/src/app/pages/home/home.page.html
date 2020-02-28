@@ -1,9 +1,11 @@
 <ion-header>
   <ion-toolbar color="primary">
-    <ion-title>ECU-911 {{nombre}}</ion-title>
-    <ion-button (click)="logout()">
-      <ion-icon slot="icon-only" name = "log-out"></ion-icon>
-    </ion-button>
+    <ion-title>Bienvenido {{nombre | async}}
+      <ion-button (click)="cerrarSesion()">
+        <ion-icon slot="icon-only" name = "log-out"></ion-icon>
+      </ion-button>
+    </ion-title>
+    
   </ion-toolbar>
 </ion-header>
 
@@ -13,9 +15,7 @@
       <ion-card-title class="titulo">Emergencia</ion-card-title>
     </ion-card-header>
     <div>
-      <!-- titulo: {{emergencia.titulo}} -->
       <ion-list>
-
         <ion-item>
           <ion-label>
             <h2>Titulo</h2>
