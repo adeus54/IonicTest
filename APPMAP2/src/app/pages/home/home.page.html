@@ -47,7 +47,7 @@
             routerLink="/ficha-emergencia/{{emergencia.id}}" >Detalles
         </ion-button>
         <ion-button color="danger"   (click)="emergenciaSelected(emergencia)" routerLink="/retroalimentacion/{{emergencia.id}}"> Retroalimentacion</ion-button>
-        <ion-button color="danger"  [routerLink]="['/mapa']"> Mapa</ion-button>
+        <ion-button color="danger" (click)="emergenciaSelected(emergencia)" routerLink="/mapa/{{emergencia.id}}" [routerLink]="['/mapa']"> Mapa</ion-button>
       </div>
     </div>
   </ion-card>

@@ -1,16 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
-import Map from 'ol/Map';
-import View from 'ol/View';
-import OSM from 'ol/source/OSM';
-import 'ol/ol.css';
-import TileLayer from 'ol/layer/Tile';
-import Point from 'ol/geom/Point';
-import Feature from 'ol/Feature';
-import Vector from 'ol/source/Vector';
-import LVector from 'ol/layer/Vector';
-import { fromLonLat } from 'ol/proj';
-
+import * as L from 'leaflet';
+import 'leaflet-routing-machine';
+import { EmergenciaService } from '../../services/emergencia.service';
+import { Emergencia } from '../../interfaces/emergencia';
+import { ActivatedRoute, Params } from '@angular/router';
+import { Geolocation, Geoposition } from '@ionic-native/geolocation/ngx';
 
 @Component({
   selector: 'app-mapa',
@@ -19,25 +14,97 @@ import { fromLonLat } from 'ol/proj';
 })
 export class MapaPage implements OnInit {
 
-  map: Map;
-  constructor() { }
+  map: L.Map;
+  //idgencia;
+  actualPosition = [];
+
+  public emergencia: Emergencia = {};
+  //public geolocation: Geolocation;
+
+  constructor(private emergenciaService: EmergenciaService, 
+    private route: ActivatedRoute,
+    public geolocation: Geolocation) {
+    
+  }
 
   ngOnInit() {
+    const idEmergencia = this.route.snapshot.params['id'];
+    //this.idgencia = idEmergencia;
+    this.currentPosition();
+    this.getDetalles(idEmergencia);
+    
   }
 
 
   ionViewDidEnter() {
-      this.makemap();
+      
+      this.createmap();
+      this.createCurrentMarker();
+      this.createDestinyMarker();
+      this.routing();
   }
-  
-  makemap() {
-    var source = new OSM();
-    var layer = new TileLayer();
-    var position = fromLonLat([-79.2042236, -3.99313]);
-    var view = new View({ center: position, zoom: 16 });
-    this.map = new Map({ layers: [layer], view: view });
-    console.log('Hello');
-    this.map.setTarget('map');
-    layer.setSource(source);
+
+  currentPosition() {
+    this.geolocation.getCurrentPosition().then(resp => {
+      var lat = resp.coords.latitude
+      var lon = resp.coords.longitude
+      this.actualPosition = [lat, lon];
+      console.log(this.actualPosition)
+      }).catch((error) => {
+      console.log('Error getting location', error);
+    });
+
   }
+
+  createmap() {
+    this.map = L.map('map').setView([-3.99313, -79.2042236,], 15);
+    //L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png').addTo(this.map)
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(this.map); 
+  }
+
+  createDestinyMarker() {
+    var latLong = [this.emergencia.coorY,this.emergencia.coorX];
+    console.log(latLong);
+    var marker = L.marker(latLong,14);
+    // tslint:disable-next-line: max-line-length
+    var information = ('<b>Incidente:</b>'+'<br>' + this.emergencia.titulo+'<br>' +
+              '<b>Descripcion:</b>' + '<br>' + this.emergencia.description + '<br>' +
+              '<b>Alerta:</b>' + '<br>' + this.emergencia.alerta + '<br>');
+    marker.addTo(this.map).bindPopup(information);
+    //this.map.setView(this.latLong[0]);
+    
+  }
+
+  createCurrentMarker() {
+    var latLong = this.actualPosition;
+ 
+    var marker = L.marker(latLong,14);
+    // tslint:disable-next-line: max-line-length
+    var information = ('<b>Posicion Actual</b>');
+    marker.addTo(this.map).bindPopup(information);
+    //this.map.setView(this.latLong[0]);
+    console.log(this.actualPosition)
+  }
+
+  routing() {
+    var router = new L.Routing.OSRMv1({serviceUrl: 'http://0.0.0.0:5000/route/v1'});
+    
+    const routingControl = L.Routing.control({
+      waypoints: [
+        this.actualPosition,
+        [this.emergencia.coorY,this.emergencia.coorX],
+    ],
+    router: router,
+    });
+    this.map.addControl(routingControl);
+    //routingControl.setWaypoints(waypoints); 
+  }
+
+  getDetalles(idEmergencia: string): void {
+    this.emergenciaService.getOneEmergencia(idEmergencia).subscribe(nota => {
+        this.emergencia = nota;
+        console.log(this.emergencia)
+    });
+}
+
 }
