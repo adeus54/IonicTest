@@ -21,9 +21,9 @@ export class AuthGuard {
     };
   }
 
-  // canActivate(): boolean {
-  //   return this.authorizacionService.isAuthenticated();
-  // }
+  canActivate(): boolean {
+    return this.authorizacionService.isAuthenticated();
+  }
   
   
 }
