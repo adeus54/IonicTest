@@ -100,9 +100,9 @@ WSGI_APPLICATION = 'API_APPMAP.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'appmap',
+        'NAME': 'test',
         'USER': 'postgres',
-        'PASSWORD': '1234', #CAMBIAR CLAVE
+        'PASSWORD': 'rooter', #CAMBIAR CLAVE
         'HOST': 'localhost',
         'PORT': '5432',
     }
