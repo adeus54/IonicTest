@@ -23,6 +23,7 @@ export class RetroalimentacionPage implements OnInit {
   public retroalimentacion: RetroalimentacionEmergencia = {};
   id;
   idUsuario;
+  idEmergencia: string;
 
   username: any;
 
@@ -37,8 +38,8 @@ export class RetroalimentacionPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    const idEmergencia = this.route.snapshot.params['id'];
-    this.getDetalles(idEmergencia);
+    this.idEmergencia = this.route.snapshot.params['id'];
+    this.getDetalles(this.idEmergencia);
 
     // const idUsuario = this.route.snapshot.params['id'];
     this.getUsername();
@@ -74,7 +75,7 @@ export class RetroalimentacionPage implements OnInit {
   creaRetroalimentacion() {
     const retroalimentacion = {
 
-      emergencia: '2',
+      emergencia: this.idEmergencia,
       usuario: '1',
       estado: '2',
       Descripcion: 'por fin',
