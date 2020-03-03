@@ -28,10 +28,6 @@ export class HomePage implements OnInit{
       this.getEmergencias();
       this.getNombreUsuario();
       this.getUsername();
-      
-      // let nombre = this.authorizationService.obtenerNombreUsuario();
-      // this.username = `${nombre}`;
-
     }
 
     getUsername() {
@@ -42,7 +38,6 @@ export class HomePage implements OnInit{
       this.nombre = this.authorizationService.obtenerNombreUsuario();
     }
    
-
     getEmergencias() {
       this.emergencias = this.emergenciaService.getAllEmergencias();
     }
@@ -52,7 +47,6 @@ export class HomePage implements OnInit{
       this.emergenciaService.getOneEmergencia(emergencia.id).subscribe(
         data => {
           console.log(data)
-          // this.selectedMovie = data;
         },
         error => {
           console.log(error);

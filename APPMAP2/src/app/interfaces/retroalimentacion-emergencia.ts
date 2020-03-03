@@ -3,7 +3,7 @@ export interface RetroalimentacionEmergencia {
     emergencia?: string;
     usuario?: string;
     estado?: string;
-    descripcion?: string;
+    Descripcion?: string;
     fecha?: string;
     hora?: string;
 
