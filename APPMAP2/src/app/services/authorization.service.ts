@@ -24,7 +24,9 @@ export class AuthorizationService {
     })
   }
 
+  username;
   id;
+  nombre;
   URL_API = 'http://127.0.0.1:8000/login/';
 
   constructor(
@@ -50,20 +52,31 @@ export class AuthorizationService {
     return this.storage.get('token');
   }
 
-  //IdUsuario obtener
+  // IdUsuario obtener
+  // async obtenerIdUsuario() {
+  //   return await this.storage.get('id_user');
+  //    console.log('usuarioId', this.id);
+  //    return this.id;
+  // }
+
   async obtenerIdUsuario() {
-    this.id = await this.storage.get('id_user');
-    console.log('usuarioId', this.id);
+    this.id =  await this.storage.get('id_user');
+    console.log('idUsuario:', this.id);
     return this.id;
+  
   }
   
   //Username obtener
   async obtenerUsername(){
-    return await this.storage.get('username');
+    this.username = await this.storage.get('username');
+    console.log('username:', this.username);
+    return this.username;
   }
   //NombreUsuario obtener
-  async obtenerNombreUsuario(){
-    return await this.storage.get('nombreUsuario');
+   async obtenerNombreUsuario(){
+     this.nombre = await this.storage.get('nombreUsuario');
+     console.log('Nombre:', this.nombre);
+     return this.nombre
   }
   //Loguearse
   loginUser(userData): Observable<any>{

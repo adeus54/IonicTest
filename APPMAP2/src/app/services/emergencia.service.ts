@@ -14,7 +14,7 @@ export class EmergenciaService {
 
   constructor(
     private http: HttpClient
-  ) { }any
+  ) { }
 
   //Todas las emergencias
   getAllEmergencias(): Observable<any> {
