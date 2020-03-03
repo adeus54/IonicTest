@@ -28,11 +28,10 @@ export class RetroalimentacionPage implements OnInit {
   idUsuario;
   idEstado;
   idEmergencia: string;
-
   username: any;
+  selectedVal: Number = 0;
+  descripcion: string ="";
 
-
-  selectedVal: Number = 1;
   constructor(
     private retroalimentacionService: RetroalimentacionService,
     private emergenciaService: EmergenciaService,
@@ -48,39 +47,24 @@ export class RetroalimentacionPage implements OnInit {
     this.getUsername();
     this.getIdUsuario();
     this.getEstados();
-
   }
 
+  //Detalles de emergencia por id
   getDetalles(idEmergencia: string): void {
     this.emergenciaService.getOneEmergencia(idEmergencia).subscribe(nota => {
       this.emergencia = nota;
     });
   }
 
-  // getEmergencias() {
-  //   this.emergencias = this.emergenciaService.getAllEmergencias();
-  // }
-
+  //Obtener todos los estados
   getEstados(){
     this.estados = this.estadosService.getAllEstados();
   }
 
+  //Obtener idEstado
   getIdEstado(event){
     this.idEstado = event.target.value;
-   console.log(this.idEstado);
-  }
-
-  estadoSelected = (estado) => {
-    console.log(estado.id);
-    this.estadosService.getOneEstado(estado.id).subscribe(
-      data => {
-        console.log(data)
-        // this.selectedMovie = data;
-      },
-      error => {
-        console.log(error);
-      }
-    );  
+   console.log('idEstado:', this.idEstado);
   }
 
   //Obtener nombre usuario
@@ -88,6 +72,7 @@ export class RetroalimentacionPage implements OnInit {
     this.username =  this.authorizationService.obtenerUsername();
   }
 
+  //Obtener idUsuario
   getIdUsuario(){
     this.authorizationService.obtenerIdUsuario().then(rest => {
       this.idUsuario = rest;
@@ -98,29 +83,19 @@ export class RetroalimentacionPage implements OnInit {
   //Guardar Retroalimentacion
   creaRetroalimentacion() {
     const retroalimentacion = {
-
       emergencia: this.idEmergencia,
       usuario: this.idUsuario,
       estado: this.idEstado,
-      Descripcion: 'por fin',
-      // fecha: 'Feb-22-2020',
-      // hora: '03:09:45.281654'
+      Descripcion: this.descripcion,
     };
     this.retroalimentacionService.creaRetroalimentacion(retroalimentacion)
       .subscribe((nuevaRetroalimentacion) => {
         console.log(nuevaRetroalimentacion);
         console.log('se guardo')
       });
+    this.descripcion = "";
   }
 
   //fecha y hora del sistema
   today = Date.now();
-
-  // token() {
-  //   const token = this.retroalimentacionService.obtenerToken()
-  //   console.log(token);
-  // }
-
-
-
 }

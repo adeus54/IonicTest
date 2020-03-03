@@ -20,10 +20,4 @@ export class EstadosService {
     const path = `${this.URL_API}`;
     return this.http.get<[Estado]>(path);
   }
-  
-  getOneEstado(id): Observable<any> {
-    console.log('estadoId:', id);
-    return this.http.get(this.URL_API + id + '/');
-  }
-
 }
