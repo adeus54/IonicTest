@@ -2,8 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="84301cfb-21b9-4e38-b746-550241ce6783" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/API_APPMAP.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/API_APPMAP.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../APPMAP2/src/app/pages/mapa/mapa.page.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../APPMAP2/src/app/pages/mapa/mapa.page.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Myapi/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/Myapi/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Myapi/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/Myapi/serializers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Myapi/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/Myapi/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Myapi/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Myapi/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../APPMAP2/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../APPMAP2/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../APPMAP2/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../APPMAP2/package.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -123,9 +130,10 @@
     </option>
   </component>
   <component name="WindowStateProjectService">
-    <state x="194" y="33" key="SettingsEditor" timestamp="1582763684748">
-      <screen x="45" y="27" width="1321" height="741" />
+    <state x="154" y="6" key="SettingsEditor" timestamp="1583200796795">
+      <screen x="0" y="0" width="1366" height="768" />
     </state>
+    <state x="154" y="6" key="SettingsEditor/0.0.1366.768@0.0.1366.768" timestamp="1583200796795" />
     <state x="194" y="33" key="SettingsEditor/45.27.1321.741@45.27.1321.741" timestamp="1582763684748" />
     <state x="115" y="66" width="1146" height="528" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1576261352297">
       <screen x="0" y="0" width="1366" height="768" />

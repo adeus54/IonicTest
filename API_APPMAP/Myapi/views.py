@@ -27,8 +27,8 @@ from django.views.generic.list import ListView
 
 class FichaEmergenciaViewSet(viewsets.ModelViewSet):
     permission_classes = []
-    queryset = FichaEmergencia.objects.all()
     serializer_class = FichaEmergenciaSerializer
+    queryset = FichaEmergencia.objects.all()
 
 
 class EstadoViewSet(viewsets.ModelViewSet):
@@ -82,6 +82,13 @@ class RecursoViewSet(viewsets.ModelViewSet):
 
 
 class AsignacionEmergenciaViewSet(viewsets.ModelViewSet):
-    permission_classes = []
-    queryset = AsignacionEmergencia.objects.all()
+    permission_classes = [IsAuthenticated]
     serializer_class = AsignacionEmergenciaSerializer
+
+    def get_queryset(self):
+        user = self.request.user
+        estadofinal = 6
+        terminadas = Retroalimentacion.objects.filter(usuario=user, estado=estadofinal).values("emergencia")
+
+        return AsignacionEmergencia.objects.filter(asignacion=user).exclude(emergencia__in=terminadas)
+

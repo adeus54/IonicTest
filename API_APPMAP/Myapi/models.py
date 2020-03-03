@@ -8,16 +8,16 @@ from django.contrib.auth.models import AbstractBaseUser, AbstractUser
 # Create your models here.
 class FichaEmergencia(models.Model):
     TIPO_LLAMADA = (
-        (1, 'Celular'),
-        (2, 'Telefono Fijo'),
+        ('CELULAR', 'Celular'),
+        ('TELEFONO', 'Telefono Fijo'),
     )
     CLAVE_ALARMA = (
-        (1, 'Clave Amarilla'),
-        (2, 'Clave Roja'),
+        ('AMARILLA', 'Clave Amarilla'),
+        ('ROJA', 'Clave Roja'),
     )
     titulo = models.CharField(max_length=150, default='')
     telefono = models.CharField(max_length=10, default='')
-    tipollamada = models.CharField(max_length=10, choices=TIPO_LLAMADA, default=1,)
+    tipollamada = models.CharField(max_length=30, choices=TIPO_LLAMADA)
     fecha_e = models.DateField()
     hora = models.TimeField()
     provincia = models.CharField(max_length=25, default='')
@@ -27,7 +27,7 @@ class FichaEmergencia(models.Model):
     description = models.TextField()
     operador = models.CharField(max_length=50, default='')
     reportador = models.CharField(max_length=50, default='')
-    alerta = models.CharField(max_length=30, choices=CLAVE_ALARMA, default=2,)
+    alerta = models.CharField(max_length=30, choices=CLAVE_ALARMA)
     coorX = models.FloatField()
     coorY = models.FloatField()
 
@@ -79,6 +79,8 @@ class Retroalimentacion(models.Model):
     fecha = models.DateField(auto_now_add=True)
     hora = models.TimeField(auto_now=True)
 
+    def __str__(self):
+        return self.emergencia.titulo+ ' - ' + self.estado.tipo
 
 class AsignacionEmergencia(models.Model):
     emergencia = models.ForeignKey(FichaEmergencia, related_name='FichEmergencia', on_delete=models.CASCADE)

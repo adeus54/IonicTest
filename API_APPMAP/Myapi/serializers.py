@@ -1,4 +1,6 @@
 from rest_framework import serializers
+from rest_framework.validators import UniqueTogetherValidator
+
 from .models import FichaEmergencia
 from .models import Estado
 from .models import Retroalimentacion
@@ -15,28 +17,24 @@ class RetroalimentacionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Retroalimentacion
         fields = ('emergencia','usuario', 'estado', 'Descripcion', 'fecha', 'hora')
+        validators = [
+            UniqueTogetherValidator(
+                queryset=Retroalimentacion.objects.all(),
+                fields=['emergencia', 'usuario','estado']
+            )
+        ]
 
 
 class FichaEmergenciaSerializer(serializers.ModelSerializer):
-    # ficha = RetroalimentacionSerializer(many=True, read_only=True)
-
+    #ficha = RetroalimentacionSerializer(many=True, read_only=True)
+    #tipollamada = serializers.CharField(source='get_tipollamada_display')
     class Meta:
         model = FichaEmergencia
-        fields = ('id', 'titulo',
-                  'telefono',
-                  'tipollamada',
-                  'fecha_e',
-                  'hora',
-                  'provincia',
-                  'canton',
-                  'direccionReporte',
-                  'direccionIncidente',
-                  'description',
-                  'operador',
-                  'reportador',
-                  'alerta',
+        fields = ('id', 'titulo', 'telefono', 'tipollamada', 'fecha_e', 'hora', 'provincia', 'canton',
+                  'direccionReporte', 'direccionIncidente', 'description', 'operador', 'reportador', 'alerta',
                   'coorX',
-                  'coorY', )#'ficha'
+                  'coorY')#, 'ficha')
+
 
 
 class EstadoSerializer(serializers.ModelSerializer):
@@ -103,10 +101,16 @@ class RecursoSerializer(serializers.ModelSerializer):
 
 
 class AsignacionEmergenciaSerializer(serializers.ModelSerializer):
-    #emergencia = ichaEmergenciaSerializer(many=False, read_only=True)
+    #emergencia = FichaEmergenciaSerializer(many=False, read_only=True)
     #asignacion = UsuarioSerializer(many=False, read_only=True)
 
     class Meta:
         model = AsignacionEmergencia
         fields = ('emergencia', 'asignacion')
         #depth = 1
+        validators = [
+            UniqueTogetherValidator(
+                queryset=AsignacionEmergencia.objects.all(),
+                fields=['emergencia', 'asignacion']
+            )
+        ]

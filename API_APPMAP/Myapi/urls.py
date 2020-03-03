@@ -10,7 +10,7 @@ router.register(r'retroalimentaciones', views.RetroalimentacionViewSet)
 router.register(r'usuarios', views.UsuarioViewSet)
 router.register(r'institucion', views.InstitucionViewSet)
 router.register(r'recurso', views.RecursoViewSet)
-router.register(r'asignacionemergencia', views.AsignacionEmergenciaViewSet)
+router.register(r'asignacionemergencia', views.AsignacionEmergenciaViewSet, basename='mymodel')
 
 
 # Wire up our API using automatic URL routing.
