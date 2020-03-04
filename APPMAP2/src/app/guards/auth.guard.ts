@@ -17,13 +17,12 @@ export class AuthGuard {
   ngOnInit() {
     this.input = {
       username: '',
-      password: ''    
+      password: ''
     };
   }
 
   canActivate(): boolean {
     return this.authorizacionService.isAuthenticated();
   }
-  
-  
+
 }

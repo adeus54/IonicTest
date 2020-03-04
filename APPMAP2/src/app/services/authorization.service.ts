@@ -46,10 +46,12 @@ export class AuthorizationService {
       console.log(res)
     }) 
   }
-
+  token;
   //Token obtener
-  obtenerToken() {
-    return this.storage.get('token');
+  async obtenerToken() {
+    this.token=this.storage.get('token');
+    console.log(this.token+" obteniendo token")
+    return 
   }
 
   // IdUsuario obtener

@@ -31,17 +31,17 @@ export class MapaPage implements OnInit {
     const idEmergencia = this.route.snapshot.params['id'];
     //this.idgencia = idEmergencia;
     this.currentPosition();
-    this.getDetalles(idEmergencia);
+//aqui    this.getDetalles(idEmergencia);
     
   }
 
 
   ionViewDidEnter() {
       
-      this.createmap();
+      this.createmap();/*aqui
       this.createCurrentMarker();
       this.createDestinyMarker();
-      this.routing();
+      this.routing();*/
   }
 
   currentPosition() {
@@ -61,7 +61,7 @@ export class MapaPage implements OnInit {
     //L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png').addTo(this.map)
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(this.map); 
   }
-
+/*aqui
   createDestinyMarker() {
     var latLong = [this.emergencia.coorY,this.emergencia.coorX];
     console.log(latLong);
@@ -105,6 +105,6 @@ export class MapaPage implements OnInit {
         this.emergencia = nota;
         console.log(this.emergencia)
     });
-}
+}*/
 
 }

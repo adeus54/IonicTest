@@ -1,9 +1,10 @@
-import { Component, OnInit,} from '@angular/core';
+import { Component, OnInit, MissingTranslationStrategy,} from '@angular/core';
 import { EmergenciaService } from '../../services/emergencia.service';
 import { Emergencia } from '../../interfaces/emergencia';
 import { Observable } from 'rxjs';
-import { AuthorizationService} from '../../services/authorization.service'
+import { AuthorizationService} from '../../services/authorization.service';
 import { Router } from '@angular/router';
+import { Assignation } from '../../interfaces/asignacion';
 
 @Component({
   selector: 'app-home',
@@ -14,7 +15,9 @@ export class HomePage implements OnInit{
 
     username: any;
     nombre: any;
-    
+    id: any;
+  
+    assignation: Assignation[];
     emergencias: Observable<Emergencia[]>;
     selectedMovie;
 
@@ -28,6 +31,14 @@ export class HomePage implements OnInit{
       this.getEmergencias();
       this.getNombreUsuario();
       this.getUsername();
+      this.getIdUser();
+    }
+    getIdUser() {
+      this.authorizationService.obtenerIdUsuario().then(resp=>{
+        this.id = resp;
+        this.getEmergenciasAsignadas(this.id);
+      });
+      
     }
 
     getUsername() {
@@ -40,6 +51,13 @@ export class HomePage implements OnInit{
    
     getEmergencias() {
       this.emergencias = this.emergenciaService.getAllEmergencias();
+    }
+    getEmergenciasAsignadas(idUser){
+      this.emergenciaService.getAllAssignationEmergency().subscribe(data=>{
+        const arrayA = data;
+        console.log(arrayA);
+      });
+     // this.emergenciaService.asignacionEmergecia();
     }
 
     emergenciaSelected = (emergencia) => {

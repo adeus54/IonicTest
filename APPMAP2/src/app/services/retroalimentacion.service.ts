@@ -26,10 +26,10 @@ export class RetroalimentacionService {
   }
 
   creaRetroalimentacion(retroalimentacion: RetroalimentacionEmergencia) {
-    const token = this.obtenerToken()
+    const token = this.obtenerToken();
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      'Authorization': 'token' + token,
+      'Authorization': 'token ' + token,
     });
     let params = JSON.stringify(retroalimentacion); 
    
