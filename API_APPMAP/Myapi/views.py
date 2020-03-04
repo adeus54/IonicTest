@@ -45,7 +45,7 @@ class EstadoViewSet(viewsets.ModelViewSet):
 
 
 class RetroalimentacionViewSet(viewsets.ModelViewSet):
-    permission_classes = []
+    permission_classes = [IsAuthenticated]
     queryset = Retroalimentacion.objects.all()
     serializer_class = RetroalimentacionSerializer
 
@@ -91,4 +91,3 @@ class AsignacionEmergenciaViewSet(viewsets.ModelViewSet):
         terminadas = Retroalimentacion.objects.filter(usuario=user, estado=estadofinal).values("emergencia")
 
         return AsignacionEmergencia.objects.filter(asignacion=user).exclude(emergencia__in=terminadas)
-

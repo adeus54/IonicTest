@@ -39,9 +39,9 @@ export class MapaPage implements OnInit {
   ionViewDidEnter() {
       
       this.createmap();
-      this.createCurrentMarker();
-      this.createDestinyMarker();
-      this.routing();
+      // this.createCurrentMarker();
+      // this.createDestinyMarker();
+      // this.routing();
   }
 
   currentPosition() {
@@ -62,43 +62,43 @@ export class MapaPage implements OnInit {
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(this.map); 
   }
 
-  createDestinyMarker() {
-    var latLong = [this.emergencia.coorY,this.emergencia.coorX];
-    console.log(latLong);
-    var marker = L.marker(latLong,14);
-    // tslint:disable-next-line: max-line-length
-    var information = ('<b>Incidente:</b>'+'<br>' + this.emergencia.titulo+'<br>' +
-              '<b>Descripcion:</b>' + '<br>' + this.emergencia.description + '<br>' +
-              '<b>Alerta:</b>' + '<br>' + this.emergencia.alerta + '<br>');
-    marker.addTo(this.map).bindPopup(information);
-    //this.map.setView(this.latLong[0]);
+  // createDestinyMarker() {
+  //   var latLong = [this.emergencia.coorY,this.emergencia.coorX];
+  //   console.log(latLong);
+  //   var marker = L.marker(latLong,14);
+  //   // tslint:disable-next-line: max-line-length
+  //   var information = ('<b>Incidente:</b>'+'<br>' + this.emergencia.titulo+'<br>' +
+  //             '<b>Descripcion:</b>' + '<br>' + this.emergencia.description + '<br>' +
+  //             '<b>Alerta:</b>' + '<br>' + this.emergencia.alerta + '<br>');
+  //   marker.addTo(this.map).bindPopup(information);
+  //   //this.map.setView(this.latLong[0]);
     
-  }
+  // }
 
-  createCurrentMarker() {
-    var latLong = this.actualPosition;
+  // createCurrentMarker() {
+  //   var latLong = this.actualPosition;
  
-    var marker = L.marker(latLong,14);
-    // tslint:disable-next-line: max-line-length
-    var information = ('<b>Posicion Actual</b>');
-    marker.addTo(this.map).bindPopup(information);
-    //this.map.setView(this.latLong[0]);
-    console.log(this.actualPosition)
-  }
+  //   var marker = L.marker(latLong,14);
+  //   // tslint:disable-next-line: max-line-length
+  //   var information = ('<b>Posicion Actual</b>');
+  //   marker.addTo(this.map).bindPopup(information);
+  //   //this.map.setView(this.latLong[0]);
+  //   console.log(this.actualPosition)
+  // }
 
-  routing() {
-    var router = new L.Routing.OSRMv1({serviceUrl: 'http://0.0.0.0:5000/route/v1'});
+  // routing() {
+  //   var router = new L.Routing.OSRMv1({serviceUrl: 'http://0.0.0.0:5000/route/v1'});
     
-    const routingControl = L.Routing.control({
-      waypoints: [
-        this.actualPosition,
-        [this.emergencia.coorY,this.emergencia.coorX],
-    ],
-    router: router,
-    });
-    this.map.addControl(routingControl);
-    //routingControl.setWaypoints(waypoints); 
-  }
+  //   const routingControl = L.Routing.control({
+  //     waypoints: [
+  //       this.actualPosition,
+  //       [this.emergencia.coorY,this.emergencia.coorX],
+  //   ],
+  //   router: router,
+  //   });
+  //   this.map.addControl(routingControl);
+  //   //routingControl.setWaypoints(waypoints); 
+  // }
 
   getDetalles(idEmergencia: string): void {
     this.emergenciaService.getOneEmergencia(idEmergencia).subscribe(nota => {

@@ -31,10 +31,4 @@ export class EmergenciaService {
     return this.http.get(this.URL_API + '/' + id + '/')
   }
 
-
-
-
-  // getEmergencia(id: string): Observable<object> {
-  //   return this.http.get(`${this.URL_API}/${id}`);
-  // }
 }

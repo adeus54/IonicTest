@@ -24,10 +24,13 @@ export class AuthorizationService {
     })
   }
 
+  token;
   username;
   id;
+  idInst;
   nombre;
   URL_API = 'http://127.0.0.1:8000/login/';
+  URL_API_Insti = 'http://127.0.0.1:8000/institucion/';
 
   constructor(
     private http: HttpClient,
@@ -44,12 +47,17 @@ export class AuthorizationService {
     this.http.post<User>(this.URL_API, usuario, this.httpOptions).subscribe( res => {
       this.iniciarSesionUsuario(res);
       console.log(res)
+      // this.router.navigate(['/home'])
     }) 
   }
 
+
+
   //Token obtener
-  obtenerToken() {
-    return this.storage.get('token');
+  async obtenerToken() {
+    this.token = await this.storage.get('token');
+    console.log('token::', this.token);
+    return this.token;
   }
 
   // IdUsuario obtener
@@ -59,13 +67,18 @@ export class AuthorizationService {
   //    return this.id;
   // }
 
+  async obtenerIdInstitucion(){
+    this.idInst = await this.storage.get('institucion');
+    console.log('idInstitucion:', this.idInst);
+    return this.idInst;
+  }
+
   async obtenerIdUsuario() {
     this.id =  await this.storage.get('id_user');
     console.log('idUsuario:', this.id);
     return this.id;
-  
   }
-  
+
   //Username obtener
   async obtenerUsername(){
     this.username = await this.storage.get('username');
@@ -73,11 +86,13 @@ export class AuthorizationService {
     return this.username;
   }
   //NombreUsuario obtener
-   async obtenerNombreUsuario(){
-     this.nombre = await this.storage.get('nombreUsuario');
-     console.log('Nombre:', this.nombre);
-     return this.nombre
-  }
+  //  async obtenerNombreUsuario(){
+  //    this.nombre = await this.storage.get('nombreUsuario');
+  //    console.log('Nombre:', this.nombre);
+  //    return this.nombre
+  // }
+
+  
   //Loguearse
   loginUser(userData): Observable<any>{
     let headers = new HttpHeaders().set('Content-Type', 'application/json');
@@ -89,12 +104,14 @@ export class AuthorizationService {
     this.storage.set('token', usuario.token);
     this.storage.set('id_user', usuario.username.id_user);
     this.storage.set('username', usuario.username.username);
-    this.storage.set('nombreUsuario', usuario.username.first_name);
+    // this.storage.set('nombreUsuario', usuario.username.first_name);
+    this.storage.set('institucion', usuario.username.institucion);
   }
 
   //Cerrar Sesion de usuario
   cerrarSesionUsuario() {
     this.storage.clear();
+    this.storage.remove('institucion');
     this.router.navigate(['/login']);
     // this.storage.remove('token');
     // this.storage.remove('id_user');
