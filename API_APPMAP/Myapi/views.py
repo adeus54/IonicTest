@@ -26,34 +26,46 @@ from django.views.generic.list import ListView
 
 
 class FichaEmergenciaViewSet(viewsets.ModelViewSet):
-    permission_classes = []
     serializer_class = FichaEmergenciaSerializer
     queryset = FichaEmergencia.objects.all()
 
+    def get_permissions(self):
+        if self.request.method == 'GET':
+            permission_classes = [IsAuthenticated]
+        else:
+            permission_classes = [IsAdminUser]
+        return [permission() for permission in permission_classes]
+
 
 class EstadoViewSet(viewsets.ModelViewSet):
-    # permission_classes = [IsAuthenticated, IsAdminUser]
     queryset = Estado.objects.all()
     serializer_class = EstadoSerializer
 
     def get_permissions(self):
-        if self.action == 'retrieve':
-            permission_classes = []
+        if self.request.method == 'GET':
+            permission_classes = [IsAuthenticated]
         else:
-            permission_classes = []
+            permission_classes = [IsAdminUser]
         return [permission() for permission in permission_classes]
 
 
 class RetroalimentacionViewSet(viewsets.ModelViewSet):
-    permission_classes = []
+    permission_classes = [IsAuthenticated]
     queryset = Retroalimentacion.objects.all()
     serializer_class = RetroalimentacionSerializer
 
 
 class UsuarioViewSet(viewsets.ModelViewSet):
-    permission_classes = []
     serializer_class = UsuarioSerializer
     queryset = Usuario.objects.all()
+
+    def get_permissions(self):
+        if self.request.method == 'GET':
+            permission_classes = [IsAuthenticated]
+        else:
+            permission_classes = [IsAdminUser]
+        return [permission() for permission in permission_classes]
+
 
 
 class LoginView(APIView):
@@ -70,24 +82,44 @@ class LoginView(APIView):
 
 
 class InstitucionViewSet(viewsets.ModelViewSet):
-    permission_classes = []
     queryset = Institucion.objects.all()
     serializer_class = InstitucionSerializer
 
+    def get_permissions(self):
+        if self.request.method == 'GET':
+            permission_classes = [IsAuthenticated]
+        else:
+            permission_classes = [IsAdminUser]
+        return [permission() for permission in permission_classes]
+
 
 class RecursoViewSet(viewsets.ModelViewSet):
-    permission_classes = []
     queryset = Recurso.objects.all()
     serializer_class = RecursoSerializer
 
+    def get_permissions(self):
+        if self.request.method == 'GET':
+            permission_classes = [IsAuthenticated]
+        else:
+            permission_classes = [IsAdminUser]
+        return [permission() for permission in permission_classes]
+
 
 class AsignacionEmergenciaViewSet(viewsets.ModelViewSet):
-    permission_classes = [IsAuthenticated]
     serializer_class = AsignacionEmergenciaSerializer
+
+    def get_permissions(self):
+        if self.request.method == 'GET':
+            permission_classes = [IsAuthenticated]
+        else:
+            permission_classes = [IsAdminUser]
+        return [permission() for permission in permission_classes]
 
     def get_queryset(self):
         user = self.request.user
+        # id del estado que da por concluida la emergencia
         estadofinal = 6
+
         terminadas = Retroalimentacion.objects.filter(usuario=user, estado=estadofinal).values("emergencia")
 
         return AsignacionEmergencia.objects.filter(asignacion=user).exclude(emergencia__in=terminadas)

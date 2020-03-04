@@ -20,7 +20,7 @@ class RetroalimentacionSerializer(serializers.ModelSerializer):
         validators = [
             UniqueTogetherValidator(
                 queryset=Retroalimentacion.objects.all(),
-                fields=['emergencia', 'usuario','estado']
+                fields=['emergencia', 'usuario', 'estado']
             )
         ]
 
@@ -32,8 +32,8 @@ class FichaEmergenciaSerializer(serializers.ModelSerializer):
         model = FichaEmergencia
         fields = ('id', 'titulo', 'telefono', 'tipollamada', 'fecha_e', 'hora', 'provincia', 'canton',
                   'direccionReporte', 'direccionIncidente', 'description', 'operador', 'reportador', 'alerta',
-                  'coorX',
-                  'coorY')#, 'ficha')
+                  'longitud',
+                  'latitud')#, 'ficha')
 
 
 
