@@ -13,7 +13,7 @@ export interface Emergencia {
     operador?: string;
     reportador?: string;
     alerta?: string;
-    coorX?: number;
-    coorY?: number;
+    longitud?: number;
+    latitud?: number;
 }
 

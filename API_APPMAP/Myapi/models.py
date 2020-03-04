@@ -28,8 +28,8 @@ class FichaEmergencia(models.Model):
     operador = models.CharField(max_length=50, default='')
     reportador = models.CharField(max_length=50, default='')
     alerta = models.CharField(max_length=30, choices=CLAVE_ALARMA)
-    coorX = models.FloatField()
-    coorY = models.FloatField()
+    longitud = models.FloatField()
+    latitud = models.FloatField()
 
     def __str__(self):
         return self.titulo
@@ -61,14 +61,17 @@ class Recurso(models.Model):
 class Usuario(AbstractUser):
     id_user = models.CharField(max_length=10, primary_key=True, unique=True)
     first_name = models.CharField(max_length=100)
+    last_name = models.CharField(max_length=100)
     username = models.CharField(max_length=100, unique=True)
-    institucion = models.ForeignKey(Institucion, on_delete=models.CASCADE)
-    recurso = models.ForeignKey(Recurso, related_name='Recurso', on_delete=models.CASCADE)
+    institucion = models.ForeignKey(Institucion, on_delete=models.CASCADE, null=True)
+    recurso = models.ForeignKey(Recurso, related_name='Recurso', on_delete=models.CASCADE, null=True)
 
     USERNAME_FIELD = 'username'
 
+    REQUIRED_FIELDS = ['id_user', 'first_name', 'last_name']
+
     def __str__(self):
-        return self.first_name + ' ' + self.last_name + ' - ' + self.institucion.nombre
+        return self.first_name + ' ' + self.last_name
 
 
 class Retroalimentacion(models.Model):
@@ -82,6 +85,10 @@ class Retroalimentacion(models.Model):
     def __str__(self):
         return self.emergencia.titulo+ ' - ' + self.estado.tipo
 
+
 class AsignacionEmergencia(models.Model):
     emergencia = models.ForeignKey(FichaEmergencia, related_name='FichEmergencia', on_delete=models.CASCADE)
     asignacion = models.ForeignKey(Usuario, related_name='Usuario', on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.emergencia.titulo+ ' -> ' + self.asignacion.__str__()
