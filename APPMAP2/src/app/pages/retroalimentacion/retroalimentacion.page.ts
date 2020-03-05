@@ -3,7 +3,9 @@ import { Component, OnInit } from '@angular/core';
 import { RetroalimentacionService } from '../../services/retroalimentacion.service';
 import { Emergencia } from './../../interfaces/emergencia';
 import { User } from './../../interfaces/user';
+import {  Institucion } from './../../interfaces/institucion';
 import { EmergenciaService } from './../../services/emergencia.service';
+import { InstitucionService } from './../../services/institucion.service';
 import { RetroalimentacionEmergencia } from '../../interfaces/retroalimentacion-emergencia';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -27,13 +29,16 @@ export class RetroalimentacionPage implements OnInit {
   id: any;
   idUsuario;
   idEstado;
+  token;
   idEmergencia: string;
   username: any;
   selectedVal: Number = 0;
   descripcion: string ="";
+  public institucion: Institucion = {};
 
   constructor(
     private retroalimentacionService: RetroalimentacionService,
+    private institucionService: InstitucionService,
     private emergenciaService: EmergenciaService,
     private route: ActivatedRoute,
     private authorizationService: AuthorizationService,
@@ -42,18 +47,38 @@ export class RetroalimentacionPage implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.authorizationService.obtenerIdInstitucion().then(rest => {
+      console.log('idInstitucion:', rest);
+      this.getInstitucion(rest);
+    });
+
+    this.retroalimentacionService.getobtenerToken();
+
     this.idEmergencia = this.route.snapshot.params['id'];
     this.getDetalles(this.idEmergencia);
     this.getUsername();
     this.getIdUsuario();
     this.getEstados();
+    // this.tokenGet();
+    // this.getToken();
+
+
+    // this.tokenGet();
+  }
+
+  getInstitucion(idInstitucion: string): void {
+    this.institucionService.getOneInstitucion(idInstitucion).subscribe(nota => {
+      this.institucion = nota;
+      console.log('iDInstRetro:', this.institucion);
+      });
   }
 
   //Detalles de emergencia por id
   getDetalles(idEmergencia: string): void {
     this.emergenciaService.getOneEmergencia(idEmergencia).subscribe(nota => {
       this.emergencia = nota;
-    });
+      // console.log(this.emergencia);
+      });
   }
 
   //Obtener todos los estados
@@ -67,7 +92,7 @@ export class RetroalimentacionPage implements OnInit {
    console.log('idEstado:', this.idEstado);
   }
 
-  //Obtener nombre usuario
+   //Obtener nombre usuario
   getUsername() {
     this.username =  this.authorizationService.obtenerUsername();
   }
@@ -98,4 +123,8 @@ export class RetroalimentacionPage implements OnInit {
 
   //fecha y hora del sistema
   today = Date.now();
+
+  // getToken(){
+  //   this.institucionService.getobtenerToken();
+  // }
 }

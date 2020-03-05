@@ -2,15 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="84301cfb-21b9-4e38-b746-550241ce6783" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/API_APPMAP.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/API_APPMAP.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/API_APPMAP/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/API_APPMAP/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/API_APPMAP/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/API_APPMAP/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Myapi/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/Myapi/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Myapi/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/Myapi/serializers.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Myapi/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/Myapi/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Myapi/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Myapi/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../APPMAP2/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../APPMAP2/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../APPMAP2/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../APPMAP2/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../APPMAP2/src/app/pages/mapa/mapa.page.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../APPMAP2/src/app/pages/mapa/mapa.page.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,6 +39,9 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+  </component>
+  <component name="ReadonlyStatusHandler">
+    <option name="SHOW_DIALOG" value="false" />
   </component>
   <component name="RunManager" selected="Python.0001_initial">
     <configuration name="0001_initial" type="PythonConfigurationType" factoryName="Python" temporary="true">
@@ -147,5 +149,9 @@
       <screen x="0" y="0" width="1366" height="768" />
     </state>
     <state x="346" y="89" width="672" height="678" key="search.everywhere.popup/0.0.1366.768@0.0.1366.768" timestamp="1576259332475" />
+    <state x="405" y="297" key="vcs.readOnlyHandler.ReadOnlyStatusDialog" timestamp="1583304775640">
+      <screen x="0" y="0" width="1366" height="768" />
+    </state>
+    <state x="405" y="297" key="vcs.readOnlyHandler.ReadOnlyStatusDialog/0.0.1366.768@0.0.1366.768" timestamp="1583304775640" />
   </component>
 </project>

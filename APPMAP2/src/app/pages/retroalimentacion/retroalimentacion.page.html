@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar color="primary">
-    <ion-title>Emergencia ECU-911</ion-title>
+    <ion-title>Emergencia ECU-911 {{institucion.nombre}} </ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -42,7 +42,6 @@
         <ion-textarea rows="3" cols="20" type="text" placeholder="Descripción requerida..."
           [(ngModel)]="descripcion"></ion-textarea>
       </ion-item>
-
       <ion-item>
         <ion-label>
           <h2>Fecha</h2>
@@ -51,18 +50,18 @@
       </ion-item>
       <!-- {{id | async}} -->
       <ion-item>
+        
         <ion-label>
           <h2>Hora</h2>
+          
           <p>{{today | date:'h:mm a z'}}</p>
         </ion-label>
       </ion-item>
     </ion-list>
-
     <div class=botones>
       <ion-button url color="primary" fill="outline" [routerLink]="['/home']">Emergencia</ion-button>
       <ion-button url color="primary" fill="outline" (click)="creaRetroalimentacion()">Enviar</ion-button>
+      <ion-button url color="primary" fill="outline" (click)="tokenGet()">Enviar</ion-button>
     </div>
-
   </ion-card>
-
 </ion-content>
