@@ -123,3 +123,4 @@ class AsignacionEmergenciaViewSet(viewsets.ModelViewSet):
         terminadas = Retroalimentacion.objects.filter(usuario=user, estado=estadofinal).values("emergencia")
 
         return AsignacionEmergencia.objects.filter(asignacion=user).exclude(emergencia__in=terminadas)
+

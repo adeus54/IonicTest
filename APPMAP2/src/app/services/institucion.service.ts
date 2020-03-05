@@ -18,7 +18,9 @@ export class InstitucionService {
     private http: HttpClient,
     private authorizationService: AuthorizationService,
     private storage: Storage,
-  ) { }
+  ) {
+      this.getobtenerToken();
+  }
 
   // getobtenerToken() {
   //   return this.storage.get('token').then(rest => {
@@ -29,9 +31,9 @@ export class InstitucionService {
 
   getobtenerToken() {
     this.authorizationService.obtenerToken().then(rest=> {
-      console.log('InstSerToken:', this.token);
-      this.token = rest;
       
+      this.token = rest;
+      console.log('InitialTokenINSTI:', this.token);
     })
     // return this.storage.get('token').then(rest => {
     //   console.log('TokenRESE:',rest)
@@ -42,7 +44,7 @@ export class InstitucionService {
   
 
   getOneInstitucion(id): Observable<any> {
-    console.log('resetoken', this.token)
+    console.log('FinalToken Insti', this.token)
     const headers = new HttpHeaders({
       'Content-Type':'application/json',
       'Authorization':'token ' + this.token,
