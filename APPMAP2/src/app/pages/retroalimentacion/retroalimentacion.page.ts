@@ -49,7 +49,8 @@ export class RetroalimentacionPage implements OnInit {
   ngOnInit() {
     this.authorizationService.obtenerIdInstitucion().then(rest => {
       console.log('idInstitucion:', rest);
-      this.getInstitucion(rest);
+        this.getInstitucion(rest);
+
     });
 
     this.retroalimentacionService.getobtenerToken();
@@ -58,13 +59,14 @@ export class RetroalimentacionPage implements OnInit {
     this.getDetalles(this.idEmergencia);
     this.getUsername();
     this.getIdUsuario();
-    this.getEstados();
-    // this.tokenGet();
-    // this.getToken();
+    
 
+    }
 
-    // this.tokenGet();
-  }
+    ionViewDidEnter() {
+
+        this.getEstados();
+    }
 
   getInstitucion(idInstitucion: string): void {
     this.institucionService.getOneInstitucion(idInstitucion).subscribe(nota => {

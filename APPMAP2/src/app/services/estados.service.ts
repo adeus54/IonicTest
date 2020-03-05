@@ -2,7 +2,8 @@ import { Storage } from '@ionic/storage';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Estado} from './../interfaces/estado';
+import { Estado } from './../interfaces/estado';
+import { AuthorizationService } from '../services/authorization.service';
 
 
 @Injectable({
@@ -15,35 +16,38 @@ export class EstadosService {
   token;
   constructor(
     private http: HttpClient,
-    private storage: Storage
-  ) { }
-
-  getobtenerToken() {
-    return this.storage.get('token').then(rest => {
-      console.log('TokenRESE:',rest)
-      this.token = rest;
-    })
+      private storage: Storage,
+    private authorizationService: AuthorizationService,
+  ) {
+      this.getobtenerToken();
   }
+
+    getobtenerToken() {
+        this.authorizationService.obtenerToken().then(rest => {
+
+            this.token = rest;
+            console.log('InitialTokenESTaDOS:', this.token);
+        })
+    }
 
   getOneInstitucion(id): Observable<any> {
     const headers = new HttpHeaders({
       'Content-Type':'application/json',
       'Authorization':'token ' + this.token
     });
-    // let params = JSON.stringify(retroalimentacion); 
    
     const path = `${this.URL_API}`;
     return this.http.get(path + id + '/', {headers : headers});
-    // return this.http.get(path + id + '/' {headers: headders});
   }
   
 
-  getAllEstados(): Observable<any> {
+    getAllEstados(): Observable<any> {
+        console.log('FinalTokenESTaDOS', this.token)
     const headers = new HttpHeaders({
       'Content-Type':'application/json',
       'Authorization':'token ' + this.token
     });
     const path = `${this.URL_API}`;
-    return this.http.get<[Estado]>(path);
+      return this.http.get<[Estado]>(path, { headers: headers } );
   }
 }
