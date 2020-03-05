@@ -90,7 +90,7 @@ export class HomePage implements OnInit{
     }
 
     cerrarSesion() {
-      localStorage.clear();
+      
       this.authorizationService.cerrarSesionUsuario();
       // this.router.navigate(['/login']);
     }
