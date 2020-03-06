@@ -29,7 +29,7 @@ export class LoginPage implements OnInit {
   
   onLogin(){
     this.authorizacionService.consultarUsuarioIngreso(this.input);
-    this.router.navigate(['/home'])
+  //  this.router.navigate(['/home'])
   }
 
 

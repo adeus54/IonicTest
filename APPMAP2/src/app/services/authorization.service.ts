@@ -46,9 +46,8 @@ export class AuthorizationService {
   consultarUsuarioIngreso(usuario: User) {
     this.http.post<User>(this.URL_API, usuario, this.httpOptions).subscribe( res => {
       this.iniciarSesionUsuario(res);
-      console.log(res)
-      // this.router.navigate(['/home'])
-    }) 
+      this.router.navigate(['/home']);
+    });
   }
 
 
@@ -101,6 +100,7 @@ export class AuthorizationService {
 
   //Envia datos de usuario al storage 
   iniciarSesionUsuario(usuario) {
+    localStorage.setItem("token",usuario.token);
     this.storage.set('token', usuario.token);
     this.storage.set('id_user', usuario.username.id_user);
     this.storage.set('username', usuario.username.username);
@@ -111,12 +111,13 @@ export class AuthorizationService {
   //Cerrar Sesion de usuario
   cerrarSesionUsuario() {
     this.storage.clear();
+    localStorage.clear();
     this.storage.remove('institucion');
     this.router.navigate(['/login']);
-    // this.storage.remove('token');
-    // this.storage.remove('id_user');
-    // this.storage.remove('username');
-    // this.storage.remove('nombreUsuario');
+    this.storage.remove('token');
+    this.storage.remove('id_user');
+    this.storage.remove('username');
+    this.storage.remove('nombreUsuario');
 
   }
 

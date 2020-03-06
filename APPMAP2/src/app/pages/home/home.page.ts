@@ -1,4 +1,4 @@
-import { Component, OnInit,} from '@angular/core';
+import { Component, OnInit, MissingTranslationStrategy,} from '@angular/core';
 import { EmergenciaService } from '../../services/emergencia.service';
 import { Emergencia } from '../../interfaces/emergencia';
 import { Institucion } from '../../interfaces/institucion';
@@ -7,6 +7,7 @@ import { AuthorizationService} from '../../services/authorization.service'
 import { InstitucionService } from '../../services/institucion.service';
 import { Router } from '@angular/router';
 import { ActivatedRoute, Params } from '@angular/router';
+import { Assignation } from '../../interfaces/asignacion';
 
 @Component({
   selector: 'app-home',
@@ -21,6 +22,7 @@ export class HomePage implements OnInit{
     nombre: any;
     emergencias: Observable<Emergencia[]>;
     public institucion: Institucion = {};
+    asignacion: Assignation[];
     
   constructor(
     private emergenciaService: EmergenciaService,
@@ -32,7 +34,7 @@ export class HomePage implements OnInit{
 
     ngOnInit() {
 
-      this.getEmergencias();
+      this.getEmergenciasAsignadas();
       // this.getNombreUsuario();
       // this.getUsername();
       // this.authorizationService.obtenerIdInstitucion().then(rest => {
@@ -67,6 +69,13 @@ export class HomePage implements OnInit{
     getEmergencias() {
       this.emergencias = this.emergenciaService.getAllEmergencias();
     }
+    getEmergenciasAsignadas(){
+      this.emergenciaService.getAllAssignationEmergency().subscribe(data=>{
+        this.asignacion=data;
+        console.log(this.asignacion);
+      });
+     // this.emergenciaService.asignacionEmergecia();
+    }
 
     emergenciaSelected = (emergencia) => {
       console.log(emergencia.id);
@@ -81,6 +90,7 @@ export class HomePage implements OnInit{
     }
 
     cerrarSesion() {
+      
       this.authorizationService.cerrarSesionUsuario();
       // this.router.navigate(['/login']);
     }

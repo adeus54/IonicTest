@@ -23,18 +23,18 @@ export class AppComponent {
   }
 
   initializeApp() {
-    // this.platform.ready().then(() => {
-    //   this.statusBar.styleDefault();
-    //   this.splashScreen.hide();
-      
-    //   this.authorizationService.authenticationState.subscribe(state => {
-    //     console.log('Auth Changed:', state);
-    //     if (state) {
-    //       this.router.navigate(['home'])
-    //     } else {
-    //       this.router.navigate(['login']);
-    //     }
-    //   });
-    // });
+    this.platform.ready().then(() => {
+    this.statusBar.styleDefault();
+    this.splashScreen.hide();
+    
+    this.authorizationService.authenticationState.subscribe(state => {
+         console.log('Auth Changed:', state);
+         if (state) {
+           this.router.navigate(['home']);
+         } else {
+           this.router.navigate(['login']);
+         }
+       });
+     });
   }
 }
