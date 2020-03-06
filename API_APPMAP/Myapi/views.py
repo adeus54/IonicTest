@@ -31,7 +31,7 @@ class FichaEmergenciaViewSet(viewsets.ModelViewSet):
 
     def get_permissions(self):
         if self.request.method == 'GET':
-            permission_classes = [IsAuthenticated]
+            permission_classes = []
         else:
             permission_classes = [IsAdminUser]
         return [permission() for permission in permission_classes]

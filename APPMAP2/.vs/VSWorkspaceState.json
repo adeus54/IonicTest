@@ -1,16 +1,16 @@
 {
   "ExpandedNodes": [
     "",
-    "\\resources",
-    "\\resources\\android\\icon",
     "\\src",
     "\\src\\app",
-    "\\src\\app\\interfaces",
     "\\src\\app\\pages",
-    "\\src\\app\\pages\\emergencia",
     "\\src\\app\\pages\\ficha-emergencia",
+    "\\src\\app\\pages\\home",
+    "\\src\\app\\pages\\mapa",
+    "\\src\\app\\pages\\retroalimentacion",
+    "\\src\\app\\services",
     "\\src\\assets"
   ],
-  "SelectedNode": "\\src\\assets\\gps2.png",
+  "SelectedNode": "\\src\\app\\pages\\mapa\\mapa.page.ts",
   "PreviewInSolutionExplorer": false
 }
