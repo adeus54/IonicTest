@@ -17,6 +17,7 @@ from .serializers import InstitucionSerializer
 from .serializers import RecursoSerializer
 from .serializers import AsignacionEmergenciaSerializer
 from .serializers import LoginSerializer
+from .serializers import AsignacionReadSerializer
 
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from django.views.generic.list import ListView
@@ -124,3 +125,9 @@ class AsignacionEmergenciaViewSet(viewsets.ModelViewSet):
 
         return AsignacionEmergencia.objects.filter(asignacion=user).exclude(emergencia__in=terminadas)
 
+    def get_serializer_class(self):
+        if self.request.method in ['GET']:
+            # Since the ReadSerializer does nested lookups
+            # in multiple tables, only use it when necessary
+            return AsignacionReadSerializer
+        return AsignacionEmergenciaSerializer

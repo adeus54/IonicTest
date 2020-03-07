@@ -101,16 +101,18 @@ class RecursoSerializer(serializers.ModelSerializer):
 
 
 class AsignacionEmergenciaSerializer(serializers.ModelSerializer):
-    emergencia = FichaEmergenciaSerializer(many=False, read_only=True)
-    asignacion = UsuarioSerializer(many=False, read_only=True)
-
     class Meta:
         model = AsignacionEmergencia
         fields = ('emergencia', 'asignacion')
-        depth = 1
+
         validators = [
             UniqueTogetherValidator(
                 queryset=AsignacionEmergencia.objects.all(),
                 fields=['emergencia', 'asignacion']
             )
         ]
+
+
+class AsignacionReadSerializer(AsignacionEmergenciaSerializer):
+    emergencia = FichaEmergenciaSerializer(many=False, read_only=True)
+    asignacion = UsuarioSerializer(many=False, read_only=True)
