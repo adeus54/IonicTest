@@ -1,17 +1,24 @@
 <ion-header>
   <ion-toolbar color="primary">
-    <ion-title>Emergencias | ECU 911
-      <ion-button (click)="cerrarSesion()">
+    <ion-buttons slot="start">
+      <ion-chip class="ion-margin-start">
+        <ion-avatar>
+          <img src="assets/icon/usuario.png">
+        </ion-avatar>
+        <ion-label>{{nombre}}</ion-label>
+      </ion-chip>
+    </ion-buttons>
+    <ion-title>Emergencias</ion-title>
+      <ion-button slot="end" (click)="cerrarSesion()">
         <ion-icon slot="icon-only" name = "log-out"></ion-icon>
       </ion-button>
-    </ion-title>
-    
   </ion-toolbar>
 </ion-header>
 
 <ion-content fullscreen>
-    <ion-card  *ngFor="let asignacion of v2" style="width: 340px;">
-      <ion-card-header>
+  <div class="container"></div>
+    <ion-card  *ngFor="let asignacion of v2">
+      <ion-card-header color="primary">
         <ion-card-title class="titulo">Emergencia</ion-card-title>
       </ion-card-header>
       <div>
@@ -42,15 +49,17 @@
             </ion-label>
           </ion-item> 
         </ion-list>
-  
-        <div class=botones>
-          <ion-button url color="primary" fill="outline" (click)="emergenciaSelected(asignacion.emergencia.id)" 
-              routerLink="/ficha-emergencia/{{asignacion.emergencia.id}}" >Detalles
-          </ion-button>
-          <ion-button color="danger"   (click)="emergenciaSelected(emergencia)" routerLink="/retroalimentacion/{{asignacion.emergencia.id}}"> Retroalimentacion</ion-button>
-          <ion-button color="danger" (click)="emergenciaSelected(emergencia)" routerLink="/mapa/{{asignacion.emergencia.id}}" [routerLink]="['/mapa']"> Mapa</ion-button>
+        <div class="container">
+          <div class=botones>
+            <ion-button url color="primary" fill="outline" (click)="emergenciaSelected(asignacion.emergencia.id)" 
+                routerLink="/ficha-emergencia/{{asignacion.emergencia.id}}" >Detalles
+            </ion-button>
+            <ion-button color="danger"   (click)="emergenciaSelected(asignacion.emergencia.id)" routerLink="/retroalimentacion/{{asignacion.emergencia.id}}"> Retroalimentacion</ion-button>
+            <ion-button color="danger" (click)="emergenciaSelected(asignacion.emergencia.id)" routerLink="/mapa/{{asignacion.emergencia.id}}" [routerLink]="['/mapa']"> Mapa</ion-button>
+          </div>
         </div>
-      </div>
+        </div>
+        
     </ion-card>
   
 </ion-content>

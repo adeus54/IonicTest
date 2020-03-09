@@ -23,7 +23,8 @@ export class HomePage implements OnInit{
     emergencias: Observable<Emergencia[]>;
     public institucion: Institucion = {};
     asignaciones: Assignation[];
-    obj: Assignation[];
+    v2;
+
   constructor(
     private emergenciaService: EmergenciaService,
     private institucionService: InstitucionService,
@@ -35,7 +36,7 @@ export class HomePage implements OnInit{
     ngOnInit() {
 
       this.getEmergenciasAsignadas();
-      // this.getNombreUsuario();
+      this.getNombreUsuario();
       // this.getUsername();
       // this.authorizationService.obtenerIdInstitucion().then(rest => {
       //   console.log('idInstitucion:', rest);
@@ -60,38 +61,22 @@ export class HomePage implements OnInit{
     getUsername() {
       this.username = this.authorizationService.obtenerUsername();
     }
-    
-
-    // getNombreUsuario(){
-    //   this.nombre = this.authorizationService.obtenerNombreUsuario();
-    // }
-   
+    getNombreUsuario(){
+      this.authorizationService.obtenerNombreUsuario().then(
+        data => {
+          this.nombre=data;
+        }
+      )
+    }
     getEmergencias() {
       this.emergencias = this.emergenciaService.getAllEmergencias();
     }
-    valor:[];
-    a;
-    v2;
-    getEmergenciasAsignadas(){
-      this.emergenciaService.getAllAssignationEmergency().subscribe(data=>{
-        this.asignaciones=data;
-        let contador=this.asignaciones.length;
+    getEmergenciasAsignadas() {
+      this.emergenciaService.getAllAssignationEmergency().subscribe(data => {
+        this.asignaciones = data;
         let obj1 = JSON.stringify(this.asignaciones);
         this.v2 = JSON.parse(obj1);
-        console.log(this.v2);
-        /*
-        for (let index = 0; index < contador; index++) {
-          let obj = JSON.stringify(this.asignaciones[index]);
-          let v = JSON.parse(obj);
-          this.a=v.emergencia.titulo;
-          
-          console.log(this.a);
-          
-        }*/
-         
-        //let obtener =JSON.stringify(data);
       });
-     // this.emergenciaService.asignacionEmergecia();
     }
 
     emergenciaSelected = (emergencia) => {
@@ -103,11 +88,10 @@ export class HomePage implements OnInit{
         error => {
           console.log(error);
         }
-      );  
+      );
     }
 
     cerrarSesion() {
-      
       this.authorizationService.cerrarSesionUsuario();
       // this.router.navigate(['/login']);
     }

@@ -47,7 +47,6 @@ async getobtenerToken() {
   }*/
   getAllAssignationEmergency(){
     this.token=localStorage.getItem("token");
-    console.log(this.token);
     const headers = new HttpHeaders({
       'Content-Type':'application/json',
       'Authorization':'token '+this.token,

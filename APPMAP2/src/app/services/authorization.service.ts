@@ -55,7 +55,6 @@ export class AuthorizationService {
   //Token obtener
   async obtenerToken() {
     this.token = await this.storage.get('token');
-    console.log('token::', this.token);
     return this.token;
   }
 
@@ -85,11 +84,10 @@ export class AuthorizationService {
     return this.username;
   }
   //NombreUsuario obtener
-  //  async obtenerNombreUsuario(){
-  //    this.nombre = await this.storage.get('nombreUsuario');
-  //    console.log('Nombre:', this.nombre);
-  //    return this.nombre
-  // }
+    async obtenerNombreUsuario(){
+      this.nombre = await this.storage.get('nombreUsuario');
+      return this.nombre
+   }
 
   
   //Loguearse
@@ -104,7 +102,7 @@ export class AuthorizationService {
     this.storage.set('token', usuario.token);
     this.storage.set('id_user', usuario.username.id_user);
     this.storage.set('username', usuario.username.username);
-    // this.storage.set('nombreUsuario', usuario.username.first_name);
+    this.storage.set('nombreUsuario', usuario.username.first_name);
     this.storage.set('institucion', usuario.username.institucion);
   }
 
