@@ -38,14 +38,14 @@ export class EmergenciaService {
   asignacionEmergecia(id): Observable<any> {
     return this.http.get(this.URL_API + '/' + id + '/')
   }
- /*
-  getobtenerToken() {
-    this.storage.get('token').then(rest => {
-      localStorage.setItem("token", rest);
+/*
+async getobtenerToken() {
+   await this.storage.get('token').then(rest => {
+      this.getAllAssignationEmergency(rest).subscribe(data =>{
+      });
     });
   }*/
-  getAllAssignationEmergency() {
-  //  this.getobtenerToken();
+  getAllAssignationEmergency(){
     this.token=localStorage.getItem("token");
     console.log(this.token);
     const headers = new HttpHeaders({

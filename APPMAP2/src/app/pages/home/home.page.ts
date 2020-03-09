@@ -22,8 +22,8 @@ export class HomePage implements OnInit{
     nombre: any;
     emergencias: Observable<Emergencia[]>;
     public institucion: Institucion = {};
-    asignacion: Assignation[];
-    
+    asignaciones: Assignation[];
+    obj: Assignation[];
   constructor(
     private emergenciaService: EmergenciaService,
     private institucionService: InstitucionService,
@@ -69,17 +69,34 @@ export class HomePage implements OnInit{
     getEmergencias() {
       this.emergencias = this.emergenciaService.getAllEmergencias();
     }
+    valor:[];
+    a;
+    v2;
     getEmergenciasAsignadas(){
       this.emergenciaService.getAllAssignationEmergency().subscribe(data=>{
-        this.asignacion=data;
-        console.log(this.asignacion);
+        this.asignaciones=data;
+        let contador=this.asignaciones.length;
+        let obj1 = JSON.stringify(this.asignaciones);
+        this.v2 = JSON.parse(obj1);
+        console.log(this.v2);
+        /*
+        for (let index = 0; index < contador; index++) {
+          let obj = JSON.stringify(this.asignaciones[index]);
+          let v = JSON.parse(obj);
+          this.a=v.emergencia.titulo;
+          
+          console.log(this.a);
+          
+        }*/
+         
+        //let obtener =JSON.stringify(data);
       });
      // this.emergenciaService.asignacionEmergecia();
     }
 
     emergenciaSelected = (emergencia) => {
-      console.log(emergencia.id);
-      this.emergenciaService.getOneEmergencia(emergencia.id).subscribe(
+      console.log(emergencia);
+      this.emergenciaService.getOneEmergencia(emergencia).subscribe(
         data => {
           console.log(data)
         },

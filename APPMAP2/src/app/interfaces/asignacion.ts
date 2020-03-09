@@ -1,4 +1,4 @@
-export interface Assignation {
-    emergency?: number;
-    assignation?: number;
+export class Assignation {
+    emergency: number;
+    assignation: number;
 }

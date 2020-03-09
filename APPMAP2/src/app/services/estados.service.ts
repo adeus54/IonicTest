@@ -19,16 +19,7 @@ export class EstadosService {
       private storage: Storage,
     private authorizationService: AuthorizationService,
   ) {
-      this.getobtenerToken();
   }
-
-    getobtenerToken() {
-        this.authorizationService.obtenerToken().then(rest => {
-
-            this.token = rest;
-            console.log('InitialTokenESTaDOS:', this.token);
-        })
-    }
 
   getOneInstitucion(id): Observable<any> {
     const headers = new HttpHeaders({
@@ -41,13 +32,16 @@ export class EstadosService {
   }
   
 
-    getAllEstados(): Observable<any> {
-        console.log('FinalTokenESTaDOS', this.token)
+
+  
+  getAllEstados(){
+    this.token=localStorage.getItem("token");
     const headers = new HttpHeaders({
       'Content-Type':'application/json',
-      'Authorization':'token ' + this.token
+      'Authorization':'token '+this.token,
     });
     const path = `${this.URL_API}`;
-      return this.http.get<[Estado]>(path, { headers: headers } );
+    return this.http.get<Estado[]>(path,{headers: headers});
   }
+ 
 }
