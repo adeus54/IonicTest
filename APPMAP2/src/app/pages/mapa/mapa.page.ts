@@ -27,18 +27,19 @@ export class MapaPage implements OnInit {
   constructor(private emergenciaService: EmergenciaService, 
       private route: ActivatedRoute,
       public geolocation: Geolocation) {
-      
+      const idEmergencia = this.route.snapshot.params['id'];
+      this.getDetalles(idEmergencia);
   }
 
     ngOnInit() {
-        const idEmergencia = this.route.snapshot.params['id'];
+        
         this.currentPosition();
-        this.getDetalles(idEmergencia);
+        
     }
 
 
     ionViewDidEnter() {
-      
+        
         this.createmap();
         // Marca las posiciones
         this.createDestinyMarker();
@@ -64,7 +65,7 @@ export class MapaPage implements OnInit {
             console.log(this.actual_lat, this.actual_lon)
             //console.log('consulto')
             }).catch((error) => {
-                console.log('Rose -> Error getting location', error);
+                console.log('Rise -> Error getting location', error);
             });
 
     }
@@ -86,23 +87,23 @@ export class MapaPage implements OnInit {
             this.map.remove();
             console.log(' func')
         }
-        console.log('Esto no funciona')
+       
         this.map = L.map('map').setView([-3.99313, -79.2042236], 15);
         //L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png').addTo(this.map)
-        console.log('O ess esto')
+       
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(this.map); 
-        console.log('O ess esto')
+      
   }
 
   createDestinyMarker() {
-      console.log('Esto no funciona')
+      
       var marker = L.marker(L.latLng(this.destiny_lat, this.destiny_lon)).addTo(this.map);
   
       var information = ('<b>Incidente:</b>'+'<br>' + this.emergencia.titulo+'<br>' +
               '<b>Descripcion:</b>' + '<br>' + this.emergencia.description + '<br>' +
               '<b>Alerta:</b>' + '<br>' + this.emergencia.alerta + '<br>');
       marker.bindPopup(information);
-      console.log('Esto no funciona')
+     
   }
 
   createCurrentMarker() {
