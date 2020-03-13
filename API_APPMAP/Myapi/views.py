@@ -114,7 +114,7 @@ class AsignacionEmergenciaViewSet(viewsets.ModelViewSet):
         if self.request.method == 'GET':
             permission_classes = [IsAuthenticated]
         else:
-            permission_classes = []
+            permission_classes = [IsAdminUser]
         return [permission() for permission in permission_classes]
 
     def get_queryset(self):
