@@ -19,42 +19,32 @@ export class EmergenciaService {
 
   constructor(
     private http: HttpClient,
-    private authorizationService:AuthorizationService,
+    private authorizationService: AuthorizationService,
     private storage: Storage
   ) {
   }
 
-  //Todas las emergencias
-  getAllEmergencias(): Observable<any> {
-    const path = `${this.URL_API}/`;
-    return this.http.get<Emergencia[]>(path);
+  async getobtenerToken() {
+    await this.storage.get('token').then(rest => {
+      console.log('TokenEstadosRest:', rest);
+      this.getAllAssignationEmergency(rest).subscribe(data => {
+        console.log("ReservaFormComponent -> getobtenerToken -> data", data)
+      })
+    })
   }
+
   //Una emergencia
   getOneEmergencia(id): Observable<any> {
-    console.log('emergenciaId:', id);
     return this.http.get(this.URL_API + '/' + id + '/');
   }
 
-  asignacionEmergecia(id): Observable<any> {
-    return this.http.get(this.URL_API + '/' + id + '/')
-  }
-/*
-async getobtenerToken() {
-   await this.storage.get('token').then(rest => {
-      this.getAllAssignationEmergency(rest).subscribe(data =>{
-      });
-    });
-  }*/
-  getAllAssignationEmergency(){
-    this.token=localStorage.getItem("token");
+  //Asignaciones de Emergencia
+  getAllAssignationEmergency(token) {
     const headers = new HttpHeaders({
-      'Content-Type':'application/json',
-      'Authorization':'token '+this.token,
+      'Content-Type': 'application/json',
+      'Authorization': 'token ' + token,
     });
     const path = `${this.URL_API2}`;
-    return this.http.get<Assignation[]>(path,{headers: headers});
+    return this.http.get<Assignation[]>(path, { headers: headers });
   }
-  // getEmergencia(id: string): Observable<object> {
-  //   return this.http.get(`${this.URL_API}/${id}`);
-  // }
 }

@@ -21,27 +21,23 @@ export class EstadosService {
   ) {
   }
 
-  getOneInstitucion(id): Observable<any> {
-    const headers = new HttpHeaders({
-      'Content-Type':'application/json',
-      'Authorization':'token ' + this.token
+  //Obtener Token
+  async getobtenerToken() {
+    await this.storage.get('token').then(rest => {
+      console.log('TokenEstadosRest:', rest);
+      this.getAllEstados(rest).subscribe(data => {
+        console.log("ReservaFormComponent -> getobtenerToken -> data", data)
+      });
     });
-   
-    const path = `${this.URL_API}`;
-    return this.http.get(path + id + '/', {headers : headers});
   }
-  
 
-
-  
-  getAllEstados(){
-    this.token=localStorage.getItem("token");
+  //Obtener Estados
+  getAllEstados(token): Observable<any> {
     const headers = new HttpHeaders({
-      'Content-Type':'application/json',
-      'Authorization':'token '+this.token,
+      'Content-Type': 'application/json',
+      'Authorization': 'token ' + token
     });
     const path = `${this.URL_API}`;
-    return this.http.get<Estado[]>(path,{headers: headers});
+    return this.http.get<Estado[]>(path, { headers: headers });
   }
- 
 }

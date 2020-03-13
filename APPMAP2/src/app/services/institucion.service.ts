@@ -22,38 +22,22 @@ export class InstitucionService {
       this.getobtenerToken();
   }
 
-  // getobtenerToken() {
-  //   return this.storage.get('token').then(rest => {
-  //     console.log('TokenRESE:',rest)
-  //     this.token = rest;
-  //   })
-  // }
-
+  //Obtener token
   getobtenerToken() {
     this.authorizationService.obtenerToken().then(rest=> {
-      
       this.token = rest;
-      console.log('InitialTokenINSTI:', this.token);
-    })
-    // return this.storage.get('token').then(rest => {
-    //   console.log('TokenRESE:',rest)
-    //   this.token = rest;
-    // })
-    
+    });
   }
-  
+  //Obtener Institucion
 
   getOneInstitucion(id): Observable<any> {
-    console.log('FinalToken Insti', this.token)
     const headers = new HttpHeaders({
       'Content-Type':'application/json',
       'Authorization':'token ' + this.token,
     });
-    // let params = JSON.stringify(retroalimentacion); 
-   
+  
     const path = `${this.URL_API}`;
     return this.http.get(path + id + '/', {headers:headers});
-    // return this.http.get(path + id + '/' {headers: headders});
   }
   
   

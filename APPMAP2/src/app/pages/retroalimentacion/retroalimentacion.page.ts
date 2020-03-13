@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { RetroalimentacionService } from '../../services/retroalimentacion.service';
 import { Emergencia } from './../../interfaces/emergencia';
 import { User } from './../../interfaces/user';
-import {  Institucion } from './../../interfaces/institucion';
+import { Institucion } from './../../interfaces/institucion';
 import { EmergenciaService } from './../../services/emergencia.service';
 import { InstitucionService } from './../../services/institucion.service';
 import { RetroalimentacionEmergencia } from '../../interfaces/retroalimentacion-emergencia';
@@ -21,7 +21,6 @@ import { EstadosService } from './../../services/estados.service';
 })
 export class RetroalimentacionPage implements OnInit {
 
-
   public user: User = {};
   estados: Observable<Estado[]>;
   public emergencia: Emergencia = {};
@@ -29,11 +28,10 @@ export class RetroalimentacionPage implements OnInit {
   id: any;
   idUsuario;
   idEstado;
-  token;
   idEmergencia: string;
   username: any;
   selectedVal: Number = 0;
-  descripcion: string ="";
+  descripcion: string = "";
   public institucion: Institucion = {};
 
   constructor(
@@ -43,36 +41,35 @@ export class RetroalimentacionPage implements OnInit {
     private route: ActivatedRoute,
     private authorizationService: AuthorizationService,
     public storage: Storage,
-    private estadosService:  EstadosService
+    private estadosService: EstadosService
   ) { }
 
   ngOnInit() {
+    //Obtener el nombre de la institucion
     this.authorizationService.obtenerIdInstitucion().then(rest => {
-      console.log('idInstitucion:', rest);
-        this.getInstitucion(rest);
-
+      this.getInstitucion(rest);
     });
 
     this.retroalimentacionService.getobtenerToken();
 
+    //id de la Emergencia
     this.idEmergencia = this.route.snapshot.params['id'];
     this.getDetalles(this.idEmergencia);
     this.getUsername();
     this.getIdUsuario();
-    
 
-    }
+    //Obtener Token
+    this.authorizationService.obtenerToken().then(token => {
+      this.getEstados(token);
+    });
+  }
 
-    ionViewDidEnter() {
-
-        this.getEstados();
-    }
-
+  //Obtiene Institucion
   getInstitucion(idInstitucion: string): void {
     this.institucionService.getOneInstitucion(idInstitucion).subscribe(nota => {
       this.institucion = nota;
       console.log('iDInstRetro:', this.institucion);
-      });
+    });
   }
 
   //Detalles de emergencia por id
@@ -80,30 +77,29 @@ export class RetroalimentacionPage implements OnInit {
     this.emergenciaService.getOneEmergencia(idEmergencia).subscribe(nota => {
       this.emergencia = nota;
       // console.log(this.emergencia);
-      });
+    });
   }
 
   //Obtener todos los estados
-  getEstados(){
-    this.estados = this.estadosService.getAllEstados();
+  getEstados(token) {
+    this.estados = this.estadosService.getAllEstados(token);
   }
 
-  //Obtener idEstado
-  getIdEstado(event){
+  //Obtener idEstado al seleccionar
+  getIdEstado(event) {
     this.idEstado = event.target.value;
-   console.log('idEstado:', this.idEstado);
+    console.log('idEstado:', this.idEstado);
   }
 
-   //Obtener nombre usuario
+  //Obtener nombre usuario
   getUsername() {
-    this.username =  this.authorizationService.obtenerUsername();
+    this.username = this.authorizationService.obtenerUsername();
   }
 
   //Obtener idUsuario
-  getIdUsuario(){
+  getIdUsuario() {
     this.authorizationService.obtenerIdUsuario().then(rest => {
       this.idUsuario = rest;
-      console.log('IdProsd:', this.idUsuario)
     });
   }
 
@@ -125,8 +121,4 @@ export class RetroalimentacionPage implements OnInit {
 
   //fecha y hora del sistema
   today = Date.now();
-
-  // getToken(){
-  //   this.institucionService.getobtenerToken();
-  // }
 }

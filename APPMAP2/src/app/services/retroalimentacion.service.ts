@@ -27,16 +27,14 @@ export class RetroalimentacionService {
     private authorizationService: AuthorizationService
   ) { }
   
-
+  
   getobtenerToken() {
     return this.storage.get('token').then(rest => {
-      console.log('TokenRESE:',rest)
       this.token = rest;
-    })
+    });
   }
 
   creaRetroalimentacion(retroalimentacion: RetroalimentacionEmergencia) {
-    console.log('resetoken', this.token)
     const headers = new HttpHeaders({
       'Content-Type':'application/json',
       'Authorization':'token ' + this.token,

@@ -25,6 +25,8 @@ export class HomePage implements OnInit{
     asignaciones: Assignation[];
     v2;
 
+    items: any[]=[];
+
   constructor(
     private emergenciaService: EmergenciaService,
     private institucionService: InstitucionService,
@@ -34,22 +36,25 @@ export class HomePage implements OnInit{
   ) { }
 
     ngOnInit() {
-
-      this.getEmergenciasAsignadas();
+      this.authorizationService.obtenerToken().then(token => {
+        this.getEmergenciasAsignadas(token);
+      });
+      // this.getEmergenciasAsignadas();
       this.getNombreUsuario();
-      // this.getUsername();
-      // this.authorizationService.obtenerIdInstitucion().then(rest => {
-      //   console.log('idInstitucion:', rest);
-      //   this.getDetalles(rest);
-      // });
     }
 
-    // getIdInstitucion(){
-    //   this.authorizationService.obtenerIdInstitucion().then(rest => {
-    //     this.idInstitucion = rest;
-    //     console.log('IdInstitucionTS:', this.idInstitucion);
-    //   });
-    // }
+   
+
+    doRefresh(event){
+      setTimeout(()=> {
+        this.authorizationService.obtenerToken().then(token => {
+          this.getEmergenciasAsignadas(token);
+          // this.getEmergenciasAsignadas();
+        });
+        
+        event.target.complete();
+      }, 1500);
+    }
 
     getDetalles(idInstitucion: string): void {
       this.institucionService.getOneInstitucion(idInstitucion).subscribe(nota => {
@@ -58,9 +63,9 @@ export class HomePage implements OnInit{
         });
     }
 
-    getUsername() {
-      this.username = this.authorizationService.obtenerUsername();
-    }
+    // getUsername() {
+    //   this.username = this.authorizationService.obtenerUsername();
+    // }
     getNombreUsuario(){
       this.authorizationService.obtenerNombreUsuario().then(
         data => {
@@ -68,11 +73,13 @@ export class HomePage implements OnInit{
         }
       )
     }
-    getEmergencias() {
-      this.emergencias = this.emergenciaService.getAllEmergencias();
+    
+    ionViewDidEnter() {
+        this.getNombreUsuario();
     }
-    getEmergenciasAsignadas() {
-      this.emergenciaService.getAllAssignationEmergency().subscribe(data => {
+  
+    getEmergenciasAsignadas(token) {
+      this.emergenciaService.getAllAssignationEmergency(token).subscribe(data => {
         this.asignaciones = data;
         let obj1 = JSON.stringify(this.asignaciones);
         this.v2 = JSON.parse(obj1);
@@ -80,7 +87,6 @@ export class HomePage implements OnInit{
     }
 
     emergenciaSelected = (emergencia) => {
-      console.log(emergencia);
       this.emergenciaService.getOneEmergencia(emergencia).subscribe(
         data => {
           console.log(data)

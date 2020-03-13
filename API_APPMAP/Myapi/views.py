@@ -26,17 +26,6 @@ from django.views.generic.list import ListView
 # Create your views here.
 
 
-class FichaEmergenciaViewSet(viewsets.ModelViewSet):
-    serializer_class = FichaEmergenciaSerializer
-    queryset = FichaEmergencia.objects.all()
-
-    def get_permissions(self):
-        if self.request.method == 'GET':
-            permission_classes = []
-        else:
-            permission_classes = [IsAdminUser]
-        return [permission() for permission in permission_classes]
-
 
 class EstadoViewSet(viewsets.ModelViewSet):
     queryset = Estado.objects.all()
@@ -82,6 +71,18 @@ class LoginView(APIView):
         return Response({"token": token.key, "username": test.data}, status=200)
 
 
+class FichaEmergenciaViewSet(viewsets.ModelViewSet):
+    serializer_class = FichaEmergenciaSerializer
+    queryset = FichaEmergencia.objects.all()
+
+    def get_permissions(self):
+        if self.request.method == 'GET':
+            permission_classes = []
+        else:
+            permission_classes = [IsAdminUser]
+        return [permission() for permission in permission_classes]
+
+
 class InstitucionViewSet(viewsets.ModelViewSet):
     queryset = Institucion.objects.all()
     serializer_class = InstitucionSerializer
@@ -113,7 +114,7 @@ class AsignacionEmergenciaViewSet(viewsets.ModelViewSet):
         if self.request.method == 'GET':
             permission_classes = [IsAuthenticated]
         else:
-            permission_classes = [IsAdminUser]
+            permission_classes = []
         return [permission() for permission in permission_classes]
 
     def get_queryset(self):

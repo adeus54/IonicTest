@@ -36,8 +36,7 @@ export class AuthorizationService {
     private http: HttpClient,
     public storage: Storage,
     private router: Router,
-    
-    ) 
+  ) 
   {
     
   }
@@ -58,19 +57,13 @@ export class AuthorizationService {
     return this.token;
   }
 
-  // IdUsuario obtener
-  // async obtenerIdUsuario() {
-  //   return await this.storage.get('id_user');
-  //    console.log('usuarioId', this.id);
-  //    return this.id;
-  // }
-
+  //Obtener IdInstitucion
   async obtenerIdInstitucion(){
     this.idInst = await this.storage.get('institucion');
-    console.log('idInstitucion:', this.idInst);
     return this.idInst;
   }
 
+  //Obtener Id Usuario
   async obtenerIdUsuario() {
     this.id =  await this.storage.get('id_user');
     console.log('idUsuario:', this.id);
@@ -109,14 +102,12 @@ export class AuthorizationService {
   //Cerrar Sesion de usuario
   cerrarSesionUsuario() {
     this.storage.clear();
-    localStorage.clear();
     this.storage.remove('institucion');
     this.router.navigate(['/login']);
     this.storage.remove('token');
     this.storage.remove('id_user');
     this.storage.remove('username');
     this.storage.remove('nombreUsuario');
-
   }
 
   isAuthenticated(){
