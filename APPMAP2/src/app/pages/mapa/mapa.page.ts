@@ -32,28 +32,20 @@ export class MapaPage implements OnInit {
     }
 
     ngOnInit() {
-
         this.currentPosition();
-        // this.getEmergenciasAsignadas();
-
     }
 
-    // getEmergenciasAsignadas() {
-    //     this.emergenciaService.getAllAssignationEmergency().subscribe(data => {
-    //         this.asignaciones = data;
-    //     });
-    // }
-
-
-
     ionViewDidEnter() {
-
-        this.createmap();
-        // Marca las posiciones
-        this.createDestinyMarker();
-        this.createCurrentMarker();
-        // trasar ruta
-        this.routing();
+        var that = this;
+        setTimeout(function () {
+            // Crea la capa del mapa
+            that.createmap();
+            // Marca las posiciones
+            that.createDestinyMarker();
+            that.createCurrentMarker();
+            // Trasa ruta
+            that.routing();
+        }, 1800);   
     }
 
     ionViewWillLeave() {
@@ -62,20 +54,18 @@ export class MapaPage implements OnInit {
 
 
     currentPosition() {
-        console.log('coordenadas')
 
         //document.getElementById('map').innerHTML = "<div id='map' style='width: 100%; height: 100%;'></div>";
         this.geolocation.getCurrentPosition().then((geoposition: Geoposition) => {
-            //console.log('va a consultar')
+            
             this.actual_lat = geoposition.coords.latitude
             this.actual_lon = geoposition.coords.longitude
 
             console.log(this.actual_lat, this.actual_lon)
-            //console.log('consulto')
+           
         }).catch((error) => {
             console.log('Rise -> Error getting location', error);
         });
-
     }
 
 
@@ -84,7 +74,7 @@ export class MapaPage implements OnInit {
             this.emergencia = nota;
             this.destiny_lat = this.emergencia.latitud;
             this.destiny_lon = this.emergencia.longitud;
-            console.log('Mapa', this.emergencia)
+            
         });
 
     }
@@ -97,8 +87,8 @@ export class MapaPage implements OnInit {
         }
 
         this.map = L.map('map').setView([-3.99313, -79.2042236], 15);
+        // ruta de la capa del mapa
         //L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png').addTo(this.map)
-
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(this.map);
 
     }

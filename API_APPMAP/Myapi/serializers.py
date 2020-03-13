@@ -26,15 +26,13 @@ class RetroalimentacionSerializer(serializers.ModelSerializer):
 
 
 class FichaEmergenciaSerializer(serializers.ModelSerializer):
-    #ficha = RetroalimentacionSerializer(many=True, read_only=True)
-    #tipollamada = serializers.CharField(source='get_tipollamada_display')
+
     class Meta:
         model = FichaEmergencia
         fields = ('id', 'titulo', 'telefono', 'tipollamada', 'fecha_e', 'hora', 'provincia', 'canton',
                   'direccionReporte', 'direccionIncidente', 'description', 'operador', 'reportador', 'alerta',
                   'longitud',
-                  'latitud')#, 'ficha')
-
+                  'latitud')
 
 
 class EstadoSerializer(serializers.ModelSerializer):

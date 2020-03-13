@@ -20,13 +20,9 @@ from .serializers import LoginSerializer
 from .serializers import AsignacionReadSerializer
 
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
-from django.views.generic.list import ListView
 
 
 # Create your views here.
-
-
-
 class EstadoViewSet(viewsets.ModelViewSet):
     queryset = Estado.objects.all()
     serializer_class = EstadoSerializer
@@ -57,7 +53,6 @@ class UsuarioViewSet(viewsets.ModelViewSet):
         return [permission() for permission in permission_classes]
 
 
-
 class LoginView(APIView):
     permission_classes = []
 
@@ -77,7 +72,7 @@ class FichaEmergenciaViewSet(viewsets.ModelViewSet):
 
     def get_permissions(self):
         if self.request.method == 'GET':
-            permission_classes = []
+            permission_classes = [IsAuthenticated]
         else:
             permission_classes = [IsAdminUser]
         return [permission() for permission in permission_classes]
