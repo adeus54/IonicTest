@@ -44,29 +44,4 @@ export class RetroalimentacionService {
     const path = `${this.URL_API}`;
     return this.http.post(path, params, { headers: headers});
   }
-
-   // getIdUsuario(){
-  //   this.authorizationService.obtenerIdUsuario().then(rest => {
-  //     this.idUsuario = rest;
-  //     console.log('IdProsd:', this.idUsuario)
-  //   });
-  // }
-
-  // getOneInstitucion(id): Observable<any> {
-  //   const headers = new HttpHeaders({
-  //     'Content-Type': 'application/json',
-  //     'Authorization': 'token ' + this.token
-  //   });
-  //   // let params = JSON.stringify(retroalimentacion); 
-   
-  //   const path = `${this.URL_API_Insti}`;
-  //   return this.http.get(path + id + '/', { headers: headers});
-  //   // return this.http.get(path + id + '/');
-  // }
-
-  // creaRetroalimentacion(retroalimentacion: Object): Observable<object> {
-  //   return this.http.post(`${this.URL_API}/`, retroalimentacion);
-  // }
-
-
 }
