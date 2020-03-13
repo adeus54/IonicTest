@@ -2,6 +2,7 @@ import { Component, OnInit, NgModule } from '@angular/core';
 import {  AuthorizationService } from '../../services/authorization.service'
 import { Router } from '@angular/router';
 import { User } from '../../interfaces/user'
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +15,8 @@ export class LoginPage implements OnInit {
 
   constructor(
     private authorizacionService : AuthorizationService,
-    private router: Router
+    private router: Router,
+    public toastController: ToastController
     ) { 
     
   }
@@ -29,6 +31,7 @@ export class LoginPage implements OnInit {
   
   onLogin(){
     this.authorizacionService.consultarUsuarioIngreso(this.input);
+    this.presentToast();
   //  this.router.navigate(['/home'])
   }
 
@@ -38,25 +41,12 @@ export class LoginPage implements OnInit {
   }
 
  
-  // onLogin(){
-  //   this.authorizacionService.loginUser(this.input).subscribe(
-  //     response => {
-  //     // console.log(response);
-  //     var token = response;
-  //     console.log(token);
-  //     this.authorizacionService.iniciarSesionUsuario(response.token, response.username, response.id);
-  //     // console.log(response);
-  //     this.router.navigate(['/home'])
-  //     },
-  //     error => {
-  //       // alert('USER' + ' ' + ' es incorrecto');
-  //       console.log('error', error);
-  //     },
-  //   );
-  // }
-
-  // navigate(){
-  //   this.router.navigate(['/home'])
-  // }
-
+  async presentToast() {
+    const toast = await this.toastController.create({
+      color: 'success',
+      message: 'Usuario Logueado',
+      duration: 1000
+    });
+    toast.present();
+  }
 }

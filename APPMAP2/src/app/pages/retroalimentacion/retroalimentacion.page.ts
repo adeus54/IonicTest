@@ -12,8 +12,7 @@ import { Observable } from 'rxjs';
 import { AuthorizationService } from '../../services/authorization.service'
 import { Storage } from '@ionic/storage';
 import { EstadosService } from './../../services/estados.service';
-
-
+import { ToastController } from '@ionic/angular';
 @Component({
   selector: 'app-retroalimentacion',
   templateUrl: './retroalimentacion.page.html',
@@ -41,7 +40,8 @@ export class RetroalimentacionPage implements OnInit {
     private route: ActivatedRoute,
     private authorizationService: AuthorizationService,
     public storage: Storage,
-    private estadosService: EstadosService
+    private estadosService: EstadosService,
+    public toastController: ToastController
   ) { }
 
   ngOnInit() {
@@ -115,8 +115,18 @@ export class RetroalimentacionPage implements OnInit {
       .subscribe((nuevaRetroalimentacion) => {
         console.log(nuevaRetroalimentacion);
         console.log('se guardo')
+        this.presentToast();
       });
     this.descripcion = "";
+  }
+
+  async presentToast() {
+    const toast = await this.toastController.create({
+      color: 'success',
+      message: 'Retroalimetación guardada correctamente',
+      duration: 2000
+    });
+    toast.present();
   }
 
   //fecha y hora del sistema
