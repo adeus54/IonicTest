@@ -39,8 +39,6 @@ export class InstitucionService {
     const path = `${this.URL_API}`;
     return this.http.get(path + id + '/', {headers:headers});
   }
-  
-  
 }
 
 

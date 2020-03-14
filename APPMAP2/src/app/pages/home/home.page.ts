@@ -5,6 +5,7 @@ import { Institucion } from '../../interfaces/institucion';
 import { Observable } from 'rxjs';
 import { AuthorizationService} from '../../services/authorization.service'
 import { InstitucionService } from '../../services/institucion.service';
+import { AsignacionEmergenciaService } from '../../services/asignacion-emergencia.service'
 import { Router } from '@angular/router';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Assignation } from '../../interfaces/asignacion';
@@ -31,8 +32,7 @@ export class HomePage implements OnInit{
     private emergenciaService: EmergenciaService,
     private institucionService: InstitucionService,
     private authorizationService: AuthorizationService,
-    private route: ActivatedRoute,
-    private router: Router
+   private asignacionemergenciaService: AsignacionEmergenciaService
   ) { }
 
     ngOnInit() {
@@ -79,7 +79,7 @@ export class HomePage implements OnInit{
     }
   
     getEmergenciasAsignadas(token) {
-      this.emergenciaService.getAllAssignationEmergency(token).subscribe(data => {
+      this.asignacionemergenciaService.getAllAssignationEmergency(token).subscribe(data => {
         this.asignaciones = data;
         let obj1 = JSON.stringify(this.asignaciones);
         this.v2 = JSON.parse(obj1);

@@ -68,7 +68,6 @@ export class RetroalimentacionPage implements OnInit {
   getInstitucion(idInstitucion: string): void {
     this.institucionService.getOneInstitucion(idInstitucion).subscribe(nota => {
       this.institucion = nota;
-      console.log('iDInstRetro:', this.institucion);
     });
   }
 
@@ -116,6 +115,9 @@ export class RetroalimentacionPage implements OnInit {
         console.log(nuevaRetroalimentacion);
         console.log('se guardo')
         this.presentToast();
+      },
+      error => {
+        this.errorToast();
       });
     this.descripcion = "";
   }
@@ -128,6 +130,17 @@ export class RetroalimentacionPage implements OnInit {
     });
     toast.present();
   }
+
+  async errorToast() {
+    const toast = await this.toastController.create({
+      color: 'danger',
+      message: 'Llene todos los campos',
+      duration: 2000
+    });
+    toast.present();
+  }
+
+
 
   //fecha y hora del sistema
   today = Date.now();

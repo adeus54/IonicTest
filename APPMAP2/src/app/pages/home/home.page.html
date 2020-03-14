@@ -10,7 +10,8 @@
     </ion-buttons>
     <ion-title>ECU 911</ion-title>
     <ion-button slot="end" (click)="cerrarSesion()" color="danger">
-      <ion-icon slot="icon-only" name="log-out"></ion-icon>
+      <ion-icon slot="icon-only" name="exit"></ion-icon>
+      <!-- <ion-icon name="exit-outline"></ion-icon> -->
     </ion-button>
   </ion-toolbar>
 </ion-header> 
@@ -57,7 +58,7 @@
               routerLink="/ficha-emergencia/{{asignacion.emergencia.id}}">Detalles
             </ion-button>
             <ion-button color="danger" (click)="emergenciaSelected(asignacion.emergencia.id)"
-              routerLink="/retroalimentacion/{{asignacion.emergencia.id}}"> Retroalimentacion</ion-button>
+              routerLink="/retroalimentacion/{{asignacion.emergencia.id}}"> Retroalimentación</ion-button>
             <ion-button color="danger" (click)="emergenciaSelected(asignacion.emergencia.id)"
               routerLink="/mapa/{{asignacion.emergencia.id}}" [routerLink]="['/mapa']"> Mapa</ion-button>
           </div>

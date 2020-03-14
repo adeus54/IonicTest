@@ -1,5 +1,3 @@
-import { Params } from '@angular/router';
-import { Platform } from '@ionic/angular';
 import { Injectable } from '@angular/core';
 import { HttpClient,  HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -7,6 +5,7 @@ import { User } from "../interfaces/user";
 import { BehaviorSubject } from "rxjs";
 import { Storage } from '@ionic/storage'
 import { Router } from '@angular/router';
+import { ToastController } from '@ionic/angular';
 
 const TOKEN_KEY = 'auth-token';
 
@@ -36,6 +35,7 @@ export class AuthorizationService {
     private http: HttpClient,
     public storage: Storage,
     private router: Router,
+    private toastController: ToastController
   ) 
   {
     
@@ -45,11 +45,33 @@ export class AuthorizationService {
   consultarUsuarioIngreso(usuario: User) {
     this.http.post<User>(this.URL_API, usuario, this.httpOptions).subscribe( res => {
       this.iniciarSesionUsuario(res);
+      this.presentToast()
       this.router.navigate(['/home']);
+      
+    }, error => {
+      this.errorLogueo();
     });
   }
 
+  //Toast logueo correcto
+  async presentToast() {
+    const toast = await this.toastController.create({
+      color: 'success',
+      message: 'Usuario Logueado',
+      duration: 500
+    });
+    toast.present();
+  }
 
+  //Toast error Logueo
+  async errorLogueo() {
+    const toast = await this.toastController.create({
+      color: 'danger',
+      message: 'Usuario o Contraseña Incorrecto',
+      duration: 1000
+    });
+    toast.present();
+  }
 
   //Token obtener
   async obtenerToken() {
