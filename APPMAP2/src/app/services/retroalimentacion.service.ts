@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { RetroalimentacionEmergencia } from '../interfaces/retroalimentacion-emergencia';
-import { Observable, } from 'rxjs';
-import { Storage } from '@ionic/storage'
+import { Storage } from '@ionic/storage';
 import { AuthorizationService } from '../services/authorization.service';
 import { Institucion } from './../interfaces/institucion';
 
@@ -16,8 +15,6 @@ export class RetroalimentacionService {
   instituciones: Institucion[];
   
   URL_API = 'http://127.0.0.1:8000/retroalimentaciones/';
-  
-  // URL_API_Insti = 'http://127.0.0.1:8000/institucion/';
 
   token;
   
@@ -25,9 +22,10 @@ export class RetroalimentacionService {
     private http: HttpClient,
     private storage: Storage,
     private authorizationService: AuthorizationService
-  ) { }
-  
-  
+  ) { 
+    this.getobtenerToken();
+  }
+   
   getobtenerToken() {
     return this.storage.get('token').then(rest => {
       this.token = rest;

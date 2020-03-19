@@ -85,6 +85,12 @@ export class AuthorizationService {
     return this.idInst;
   }
 
+  //Obtener Recurso
+  async obtenerIdRecurso(){
+    this.idInst = await this.storage.get('recurso');
+    return this.idInst;
+  }
+
   //Obtener Id Usuario
   async obtenerIdUsuario() {
     this.id =  await this.storage.get('id_user');
@@ -113,12 +119,12 @@ export class AuthorizationService {
 
   //Envia datos de usuario al storage 
   iniciarSesionUsuario(usuario) {
-    localStorage.setItem("token",usuario.token);
     this.storage.set('token', usuario.token);
     this.storage.set('id_user', usuario.username.id_user);
     this.storage.set('username', usuario.username.username);
     this.storage.set('nombreUsuario', usuario.username.first_name);
     this.storage.set('institucion', usuario.username.institucion);
+    this.storage.set('recurso', usuario.username.recurso);
   }
 
   //Cerrar Sesion de usuario

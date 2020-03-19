@@ -1,3 +1,4 @@
+import { AuthorizationService } from './authorization.service';
 import { Injectable } from '@angular/core';
 import { Assignation } from '../interfaces/asignacion';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -10,12 +11,17 @@ export class AsignacionEmergenciaService {
 
   assignation: Assignation[];
   URL_API = 'http://127.0.0.1:8000/asignacionemergencia';
-
+  token;
   constructor(
     private http: HttpClient,
     private storage: Storage,
-  ) { }
+    private authorizationService: AuthorizationService
+  ) {
+    
+    this.getobtenerToken();
+   }
 
+   
   async getobtenerToken() {
     await this.storage.get('token').then(rest => {
       console.log('TokenEstadosRest:', rest);
@@ -24,7 +30,7 @@ export class AsignacionEmergenciaService {
       });
     });
   }
-
+ 
   getAllAssignationEmergency(token) {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',

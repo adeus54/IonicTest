@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Estado } from './../interfaces/estado';
-import { AuthorizationService } from '../services/authorization.service';
 
 
 @Injectable({
@@ -17,7 +16,7 @@ export class EstadosService {
   constructor(
     private http: HttpClient,
       private storage: Storage,
-    private authorizationService: AuthorizationService,
+
   ) {
   }
 

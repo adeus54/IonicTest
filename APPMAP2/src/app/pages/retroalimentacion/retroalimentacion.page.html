@@ -1,8 +1,24 @@
-<ion-header>
+<!-- <ion-header>
   <ion-toolbar color="danger">
-    <ion-title>{{institucion.nombre}} </ion-title>
+    <ion-title class="title">{{institucion.nombre}} {{recurso.unidad}} </ion-title>
+  </ion-toolbar>
+</ion-header> -->
+
+<ion-header >
+  <ion-toolbar color='danger'>   
+    <ion-buttons collapse="true" slot="end">
+      <ion-button>{{recurso.unidad}}</ion-button>
+    </ion-buttons> 
+    <ion-title>{{institucion.nombre}}</ion-title>               
   </ion-toolbar>
 </ion-header>
+
+<!-- <ion-toolbar color = 'danger'>
+  <ion-title class="title">{{institucion.nombre}} </ion-title>
+</ion-toolbar>
+<ion-toolbar>
+  <ion-title class="title"> {{recurso.unidad}}</ion-title>
+</ion-toolbar> -->
 
 <ion-content fullscreen>
   <ion-card>
